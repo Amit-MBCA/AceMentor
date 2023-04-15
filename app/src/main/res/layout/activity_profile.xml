@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Profile">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/profilebg"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gotopfpic"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp"
+                android:src="@drawable/prfpic_200"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:id="@+id/pName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="User"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="28sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/pEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/uemail_24"
+            android:drawablePadding="5dp"
+            android:paddingLeft="10dp"
+            android:text="Email"
+            android:textAlignment="viewStart"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/pStd"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/standby_24"
+            android:text="12th"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <Switch
+            android:id="@+id/isMentor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:text="Register as a Mentor"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/selectSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tvsubjectsbg"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:text="Select Subject as a Mentor"
+            android:textColor="#090000"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <Spinner
+            android:id="@+id/subjSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/tvsubjectsbg"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center_horizontal"
+            android:minHeight="48dp"
+            android:visibility="invisible"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/cstBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="75dp"
+            android:background="@drawable/rgsbtnbg"
+            android:drawableLeft="@drawable/settings_36"
+            android:padding="10dp"
+            android:text="Custom Profile "
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/applyChangesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/rgsbtnbg"
+            android:drawableLeft="@drawable/check_circle_outline_24"
+            android:padding="10dp"
+            android:text="Apply Changes"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+</ScrollView>

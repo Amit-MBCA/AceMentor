@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">IB</string>
+
+    <string-array name="setStandard">
+        <item>Select Your Standard</item>
+        <item>8th</item>
+        <item>9th</item>
+        <item>10th</item>
+        <item>11th</item>
+        <item>12th</item>
+    </string-array>
+    <string-array name="nSubjSpinner">
+        <item>Science</item>
+        <item>Math</item>
+        <item>Language and Literature</item>
+        <item>Individuals and Societies</item>
+        <item>Language Acquisition</item>
+        <item>The Arts</item>
+        <item>Core Components</item>
+    </string-array>
+    <string-array name="eSubjSpinner">
+        <item>Science</item>
+        <item>Mathematics</item>
+        <item>Language and Literature</item>
+        <item>Individuals and Societies</item>
+        <item>Language Acquisition</item>
+        <item>Arts</item>
+        <item>PHE</item>
+        <item>Design</item>
+        <item>Projects</item>
+    </string-array>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profpic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/prfpic_200"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/viewSlotBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/tvsubjectsbg"
+            android:padding="10dp"
+            android:text="View Slot"
+            android:textColor="@color/primaryColor"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:textAlignment="gravity">
+
+        <TextView
+            android:id="@+id/mentorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Mentor Name"
+            android:textAlignment="viewStart"
+            android:textColor="@color/primaryColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/mentorDisc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="#FF3C00"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.116"
+            app:layout_constraintStart_toEndOf="@+id/timerv"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

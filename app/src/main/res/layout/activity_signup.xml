@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Signup">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/profilebg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_appname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="AceMentor"
+            android:textColor="#FFFFFF"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/tvtagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profpic"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:padding="30dp"
+            android:src="@drawable/prfpic_200"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/etbg"
+            android:drawableLeft="@drawable/uname_24"
+            android:ems="10"
+            android:hint="Your Good Name"
+            android:inputType="textCapSentences"
+            android:maxLength="15"
+            android:minHeight="48dp"
+            android:paddingLeft="10dp"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/userEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/etbg"
+            android:drawableLeft="@drawable/uemail_24"
+            android:ems="10"
+            android:hint="Your email"
+            android:inputType="textPersonName|textEmailSubject"
+            android:maxLength="30"
+            android:minHeight="48dp"
+            android:paddingLeft="10dp"
+            android:textAlignment="center" />
+
+        <Spinner
+            android:id="@+id/stdSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:minHeight="48dp"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/rgstbtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rgsbtnbg"
+            android:text="Register Yourself"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>

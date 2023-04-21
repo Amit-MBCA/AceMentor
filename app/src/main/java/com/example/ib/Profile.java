@@ -17,11 +17,23 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile extends AppCompatActivity {
+
+    // Database reference declaration
+       FirebaseDatabase db;
+       DatabaseReference reference;
+    //
+
     private String user,mail,std,img,mentSubj="a",mentorSubject;
     private TextView tvname,tvemail,tvstd,tvSelectSubj;
     private CircleImageView pimg;
@@ -137,6 +149,18 @@ public class Profile extends AppCompatActivity {
                 SharedPreferences.Editor editor=shrd2.edit();
                 if(isCheck) {
                     editor.putBoolean("isMentor", true);
+
+                    ///Reference of Mentor class
+                    Mentors mentors = new Mentors(user,mail,std,img,mentSubj);
+                    db = FirebaseDatabase.getInstance();
+                    reference = db.getReference("Mentors");
+                    reference.child(mentSubj).setValue(mentors).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
                 }
                 else{
                     editor.putBoolean("isMentor",false);

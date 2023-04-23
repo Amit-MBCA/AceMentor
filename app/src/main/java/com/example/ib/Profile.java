@@ -46,7 +46,7 @@ public class Profile extends AppCompatActivity {
     Uri uri;
 
 
-    private String user, mail, std, img, mentSubj = "a", mentorSubject;
+    private String user, mail, std, img, mentSubj = "a", mentorSubject , id;
     private TextView tvname, tvemail, tvstd, tvSelectSubj;
     private CircleImageView pimg;
     private boolean check;
@@ -80,6 +80,7 @@ public class Profile extends AppCompatActivity {
         std = shrd1.getString("selectedStd", "8th");
         img = shrd1.getString("image_data", "image");
         mentor = shrd1.getBoolean("isMentor", false);
+        id = shrd1.getString("ID","123");
 
         mentorSubject = shrd1.getString("mentorSubject", "Science");
         if (std.equals("11th") || std.equals("12th")) {
@@ -213,7 +214,7 @@ public class Profile extends AppCompatActivity {
                                 //Realtime database setup
                                 db = FirebaseDatabase.getInstance();
                                 reference = db.getReference("Mentors");
-                                reference.child(mentSubj).setValue(mentors).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                reference.child(mentSubj).child(id).setValue(mentors).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();

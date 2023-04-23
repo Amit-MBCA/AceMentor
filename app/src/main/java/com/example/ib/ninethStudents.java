@@ -33,7 +33,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="Science";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }
@@ -43,7 +43,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="Math";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }
@@ -53,7 +53,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="Language and Literature";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }
@@ -63,7 +63,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="Individuals and Societies";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }
@@ -73,7 +73,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="Language Acquisition";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }
@@ -83,7 +83,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="The Arts";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }
@@ -93,7 +93,7 @@ public class ninethStudents extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it=new Intent(ninethStudents.this,SlotActivity.class);
                 subj="Core Components";
-                it.putExtra("subj",subj);
+                it.putExtra("Subject",subj);
                 it.putExtra("std",std);
                 startActivity(it);
             }

@@ -50,6 +50,8 @@ public class HomePage extends AppCompatActivity {
             gts11.setVisibility(View.VISIBLE);
             subimg11.setVisibility(View.VISIBLE);
         }
+
+
         civ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

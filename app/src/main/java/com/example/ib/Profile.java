@@ -220,6 +220,14 @@ public class Profile extends AppCompatActivity {
                                     }
                                 });
 
+//                                FirebaseDatabase.getInstance().getReference("Mentors").push().setValue(mentors).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                    @Override
+//                                    public void onComplete(@NonNull Task<Void> task) {
+//                                        Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();
+//                                    }
+//                                });
+
+
                                 // < end > Realtime Database code
 
                             }

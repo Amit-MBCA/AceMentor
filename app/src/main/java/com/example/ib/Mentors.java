@@ -1,12 +1,10 @@
 package com.example.ib;
 
 public class Mentors {
-
     String user,mail,std,img, mentSubj;
 
     public Mentors() {
     }
-
     public Mentors(String user, String mail, String std, String img, String mentSubj) {
         this.user = user;
         this.mail = mail;

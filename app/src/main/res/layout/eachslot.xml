@@ -54,7 +54,6 @@
                     android:id="@+id/mentorName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:paddingTop="10dp"
                     android:paddingBottom="2dp"
                     android:text="Mentor Name"

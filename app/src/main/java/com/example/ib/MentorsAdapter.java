@@ -69,7 +69,7 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
 //            progressBar = (ProgressBar)itemView.findViewById(R.id.progressCircular);
             img =(CircleImageView)itemView.findViewById(R.id.profpic);
             name = (TextView) itemView.findViewById(R.id.mentorName);
-            discription = (TextView) itemView.findViewById(R.id.mentorDisc);
+            discription = (TextView) itemView.findViewById(R.id.mentorMail);
             slot = (Button) itemView.findViewById(R.id.viewSlotBtn);
         }
     }
@@ -81,8 +81,11 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
 //        }
 //    }
 
-
 }
+
+
+
+
 
 
 

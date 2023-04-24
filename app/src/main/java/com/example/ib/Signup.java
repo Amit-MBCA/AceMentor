@@ -24,7 +24,7 @@ import java.util.UUID;
 public class Signup extends AppCompatActivity {
 
     //creating a string which carry random number for Id of student
-    private static final String id = UUID.randomUUID().toString();
+    private static String id = UUID.randomUUID().toString();
 
 //    ImageView profpic;
     ActivitySignupBinding binding;
@@ -62,6 +62,10 @@ public class Signup extends AppCompatActivity {
             }
         });
         SharedPreferences shrd1=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
+        String tempID = shrd1.getString("ID","123");
+
+        id = tempID;
+
         SharedPreferences.Editor editor1=shrd1.edit();
         hasSignedup=shrd1.getBoolean("hasSignedUp",false);
         if(hasSignedup){
@@ -104,6 +108,7 @@ public class Signup extends AppCompatActivity {
                         Toast.makeText(Signup.this, "Your Data Processed Successfully", Toast.LENGTH_SHORT).show();
                         SharedPreferences.Editor editor = userdata.edit();
 //                        editor.putString("image_data",encodedImage);
+
                         editor.putString("ID", id);
                         editor.putBoolean("prvalid", true);
                         editor.putString("uName", uName);

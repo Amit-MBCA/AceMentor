@@ -1,11 +1,14 @@
 package com.example.ib;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -70,31 +73,56 @@ public class HomePage extends AppCompatActivity {
         subimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomePage.this,ninethStudents.class);
-                startActivity(intent);
+                if(isNetworkConnected()) {
+                    Intent intent = new Intent(HomePage.this, ninethStudents.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         gts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomePage.this,ninethStudents.class);
-                startActivity(intent);
+                if(isNetworkConnected()) {
+                    Intent intent = new Intent(HomePage.this, ninethStudents.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         subimg11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomePage.this,eleventhStudents.class);
-                startActivity(intent);
+                if(isNetworkConnected()) {
+                    Intent intent = new Intent(HomePage.this, eleventhStudents.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         gts11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomePage.this,scheduleMeet.class);
-                startActivity(intent);
+                if(isNetworkConnected()) {
+                    Intent intent = new Intent(HomePage.this, eleventhStudents.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"Check your Internet Connection",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

@@ -37,7 +37,7 @@ public class SlotActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slot);
 
-
+        getSupportActionBar().hide();
         Bundle extras = getIntent().getExtras();
         String subject= extras.getString("Subject");
 

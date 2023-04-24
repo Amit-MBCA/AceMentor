@@ -91,7 +91,7 @@ public class HomePage extends AppCompatActivity {
         gts11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomePage.this,eleventhStudents.class);
+                Intent intent=new Intent(HomePage.this,scheduleMeet.class);
                 startActivity(intent);
             }
         });

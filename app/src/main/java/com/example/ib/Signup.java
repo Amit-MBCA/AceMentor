@@ -19,10 +19,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.ib.databinding.ActivitySignupBinding;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
+import java.util.UUID;
+
 public class Signup extends AppCompatActivity {
+
+    //creating a string which carry random number for Id of student
+    private static final String id = UUID.randomUUID().toString();
+
 //    ImageView profpic;
     ActivitySignupBinding binding;
     private ArrayAdapter stdAdapter;
+
     private Uri uri;
     private int spinnerpos;
     private String encodedImage,selectedstd,user,std,mail,img;
@@ -97,6 +104,7 @@ public class Signup extends AppCompatActivity {
                         Toast.makeText(Signup.this, "Your Data Processed Successfully", Toast.LENGTH_SHORT).show();
                         SharedPreferences.Editor editor = userdata.edit();
 //                        editor.putString("image_data",encodedImage);
+                        editor.putString("ID", id);
                         editor.putBoolean("prvalid", true);
                         editor.putString("uName", uName);
                         editor.putString("uEmail", uEmail);

@@ -49,9 +49,7 @@ public class SlotActivity extends AppCompatActivity {
         Query bookQuery= FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child("Mentors")
-                .orderByChild("mentSubj")
-                .equalTo(subject);
+                .child("Mentors").child(subject).orderByChild("user");
 
         FirebaseRecyclerOptions<Mentors> options =
                 new FirebaseRecyclerOptions.Builder<Mentors>()

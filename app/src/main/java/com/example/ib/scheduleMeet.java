@@ -3,12 +3,14 @@ package com.example.ib;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +24,13 @@ public class scheduleMeet extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_meet);
+
+
+        //get intent data from the MentorsAdapter
+        Bundle extras = getIntent().getExtras();
+        String MentorEmail= extras.getString("email");
+
+
         getSupportActionBar().hide();
         pickDay = findViewById(R.id.pickday);
         pickTime = findViewById(R.id.picktime);
@@ -93,12 +102,22 @@ public class scheduleMeet extends AppCompatActivity {
         getForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
-                it.putExtra("day",day);
-                it.putExtra("month",month);
-                it.putExtra("year",year);
-                startActivity(it);
-                finish();
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:" + MentorEmail));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Mentor Guidance");
+                intent.putExtra(Intent.EXTRA_TEXT,  getQuery + ",\n\nI am writing to you regarding your studies. Please let me know if you need any assistance.\n\nRegards,\nYour teacher");
+
+
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    v.getContext().startActivity(Intent.createChooser(intent, "Choose an email app"));
+                }
+                else{
+                    Toast.makeText(scheduleMeet.this,"No App is Installed", Toast.LENGTH_LONG).show();
+                }
+
+
+
+
             }
         });
     }

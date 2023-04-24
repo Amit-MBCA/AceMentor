@@ -26,8 +26,7 @@ public class SlotActivity extends AppCompatActivity {
     List<Mentors> mentorsList = new ArrayList<>();
     DatabaseReference db;
 
-
-
+    
     //Recycler View
     RecyclerView recview;
     MentorsAdapter adapter;
@@ -99,7 +98,6 @@ public class SlotActivity extends AppCompatActivity {
 //        adapter.notifyDataSetChanged();
 //        recview.setAdapter(adapter);
                                 //<<<<<<<<<< New Adapter setup Using Array of List >>>>>>>>>>>//
-
     }
 
 

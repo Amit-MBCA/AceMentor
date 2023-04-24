@@ -58,6 +58,7 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
     }
 
 
+    /// my view holder class
     class myViewHolder extends RecyclerView.ViewHolder{
         CircleImageView img;
         TextView name, discription;

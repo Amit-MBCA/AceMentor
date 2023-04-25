@@ -1,8 +1,12 @@
 package com.example.ib;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,9 +30,24 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
 
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull Mentors model) {
+
         holder.name.setText(model.getUser());
         holder.discription.setText(model.getMail());
         Glide.with(holder.img.getContext()).load(model.getImg()).into(holder.img);
+
+        // Add click listener to send email to selected mentors
+        holder.slot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String recipientMail = model.getMail();
+
+                Intent intent = new Intent(v.getContext(), scheduleMeet.class);
+                intent.putExtra("email", recipientMail);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                v.getContext().startActivity(intent);
+
+            }
+        });
     }
 
     @NonNull
@@ -43,6 +62,7 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
     class myViewHolder extends RecyclerView.ViewHolder{
         CircleImageView img;
         TextView name, discription;
+        Button slot;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -50,6 +70,7 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
             img =(CircleImageView)itemView.findViewById(R.id.profpic);
             name = (TextView) itemView.findViewById(R.id.mentorName);
             discription = (TextView) itemView.findViewById(R.id.mentorMail);
+            slot = (Button) itemView.findViewById(R.id.viewSlotBtn);
         }
     }
 
@@ -60,8 +81,11 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
 //        }
 //    }
 
-
 }
+
+
+
+
 
 
 

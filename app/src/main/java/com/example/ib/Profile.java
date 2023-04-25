@@ -1,5 +1,6 @@
 package com.example.ib;
 
+import static android.content.ContentValues.TAG;
 import static com.example.ib.Signup.hideSoftKeyboard;
 
 import android.annotation.SuppressLint;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +35,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.Objects;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -46,7 +50,7 @@ public class Profile extends AppCompatActivity {
     Uri uri;
 
 
-    private String user, mail, std, img, mentSubj = "a", mentorSubject , id;
+    private String user, mail, std, img, mentSubj = "a", mentorSubject, id;
     private TextView tvname, tvemail, tvstd, tvSelectSubj;
     private CircleImageView pimg;
     private boolean check;
@@ -57,6 +61,8 @@ public class Profile extends AppCompatActivity {
     private Spinner subjSpinner;
     private Boolean isOn, mentor, isCheck = false;
     public static String PREFS_NAME = "MyPrefsFile";
+
+    private String tempSubject;  // to handle the spinner subject change
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -80,7 +86,7 @@ public class Profile extends AppCompatActivity {
         std = shrd1.getString("selectedStd", "8th");
         img = shrd1.getString("image_data", "image");
         mentor = shrd1.getBoolean("isMentor", false);
-        id = shrd1.getString("ID","123");
+        id = shrd1.getString("ID", "123");
 
         mentorSubject = shrd1.getString("mentorSubject", "Science");
         if (std.equals("11th") || std.equals("12th")) {
@@ -91,6 +97,12 @@ public class Profile extends AppCompatActivity {
 
         subjSpinner = findViewById(R.id.subjSpinner);
         subjSpinner.setAdapter(subjAdapter);
+//        if (!mentorSubject.isEmpty()) {
+//            int index = subjAdapter.getPosition(mentorSubject);
+//            subjSpinner.setSelection(index);
+//        }
+
+
 //        subjAdapter= ArrayAdapter.createFromResource(this,R.array.nSubjSpinner,R.layout.subj_spinner);
         subjAdapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
         if (mentor) {
@@ -125,8 +137,11 @@ public class Profile extends AppCompatActivity {
         subjSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tempSubject = mentorSubject;
+
                 mentSubj = subjSpinner.getSelectedItem().toString();
                 hideSoftKeyboard(Profile.this, view);
+
                 shrd2 = getSharedPreferences(Signup.PREFS_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = shrd2.edit();
                 editor.putString("mentorSubject", mentSubj);
@@ -158,18 +173,30 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 shrd2 = getSharedPreferences(Signup.PREFS_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = shrd2.edit();
+
+
+                //to handle the selection of another subject as mentor
+                if (tempSubject != mentSubj) {
+                    DeleteFromFirebase(tempSubject);
+                }
+
+                //to handle the mentor switch
                 if (isCheck) {
                     editor.putBoolean("isMentor", true);
-
+                    editor.putString("mentorSubject", mentSubj);
                     //Data upload to firebase
                     uploadToFirebase();
 
                 } else {
                     editor.putBoolean("isMentor", false);
+                    editor.putString("mentorSubject", null);
+                    editor.apply();
+
+                    DeleteFromFirebase(mentSubj);
                 }
+
                 editor.putString("mentorSubject", mentSubj);
                 editor.apply();
-//                editor.commit();
                 Intent intent = new Intent(Profile.this, HomePage.class);
                 startActivity(intent);
                 finish();
@@ -186,6 +213,22 @@ public class Profile extends AppCompatActivity {
                 Intent it = new Intent(Profile.this, Signup.class);
                 startActivity(it);
                 finish();
+            }
+        });
+    }
+
+    /// Function to delete the data from the firebase database
+    private void DeleteFromFirebase(String mentorDeleteSubject) {
+        DatabaseReference nodeRef = FirebaseDatabase.getInstance().getReference("Mentors");
+        nodeRef.child(mentorDeleteSubject).child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "Node deleted successfully");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "Error deleting node", e);
             }
         });
     }
@@ -221,15 +264,7 @@ public class Profile extends AppCompatActivity {
                                     }
                                 });
 
-//                                FirebaseDatabase.getInstance().getReference("Mentors").push().setValue(mentors).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                    @Override
-//                                    public void onComplete(@NonNull Task<Void> task) {
-//                                        Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();
-//                                    }
-//                                });
-
-
-                                // < end > Realtime Database code
+                                // < end > Realtime Database push code
 
                             }
                         });

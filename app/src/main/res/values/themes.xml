@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.IB" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item> //Remove effect of dark mode
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryColor</item>

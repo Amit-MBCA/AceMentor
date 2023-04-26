@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">IB</string>
+    <string name="app_name">Ace Mentor</string>
 
     <string-array name="setStandard">
-        <item>Select Your Standard</item>
+        <item>Select Your Grade</item>
         <item>8th</item>
         <item>9th</item>
         <item>10th</item>

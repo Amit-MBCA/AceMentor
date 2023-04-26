@@ -145,19 +145,26 @@
         android:textColor="#000000"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvCore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:background="@drawable/tvsubjectsbg"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="15dp"
-        android:text="Core Components"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="18sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/tvCore"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_margin="15dp"-->
+<!--        android:background="@drawable/tvsubjectsbg"-->
+<!--        android:paddingLeft="25dp"-->
+<!--        android:paddingTop="15dp"-->
+<!--        android:paddingRight="25dp"-->
+<!--        android:paddingBottom="15dp"-->
+<!--        android:text="Core Components"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="18sp" />-->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="35dp"
+        app:srcCompat="@drawable/back_48" />
 </LinearLayout>

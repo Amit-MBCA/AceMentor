@@ -14,7 +14,7 @@
         android:layout_margin="15dp"
         android:text="IB MYP"
         android:textAlignment="center"
-        android:textColor="#F30E0E"
+        android:textColor="@color/primaryColor"
         android:textSize="34sp"
         android:textStyle="bold" />
 
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/tvmypbg"
+        android:background="@drawable/tvheading"
         android:paddingLeft="25dp"
         android:paddingTop="10dp"
         android:paddingRight="25dp"
@@ -49,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="@drawable/tvibmypsubbg"
+            android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
@@ -69,7 +69,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="@drawable/tvibmypsubbg"
+            android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="@drawable/tvibmypsubbg"
+        android:background="@drawable/tvsubjectsbg"
         android:paddingLeft="25dp"
         android:paddingTop="15dp"
         android:paddingRight="25dp"
@@ -103,7 +103,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="@drawable/tvibmypsubbg"
+        android:background="@drawable/tvsubjectsbg"
         android:paddingLeft="25dp"
         android:paddingTop="15dp"
         android:paddingRight="25dp"
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="@drawable/tvibmypsubbg"
+        android:background="@drawable/tvsubjectsbg"
         android:paddingLeft="25dp"
         android:paddingTop="15dp"
         android:paddingRight="25dp"
@@ -144,7 +144,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="@drawable/tvibmypsubbg"
+            android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
@@ -164,7 +164,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="15dp"
             android:layout_weight="1"
-            android:background="@drawable/tvibmypsubbg"
+            android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
@@ -185,12 +185,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="50dp"
             android:layout_marginTop="15dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="50dp"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:background="@drawable/tvibmypsubbg"
+            android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
@@ -200,25 +200,32 @@
             android:textColor="#000000"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/tvProjects"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/tvibmypsubbg"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
-            android:text="Projects"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="18sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvProjects"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:background="@drawable/tvsubjectsbg"-->
+<!--            android:paddingLeft="25dp"-->
+<!--            android:paddingTop="15dp"-->
+<!--            android:paddingRight="25dp"-->
+<!--            android:paddingBottom="15dp"-->
+<!--            android:text="Projects"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="#000000"-->
+<!--            android:textSize="18sp" />-->
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="35dp"
+        app:srcCompat="@drawable/back_48" />
 </LinearLayout>

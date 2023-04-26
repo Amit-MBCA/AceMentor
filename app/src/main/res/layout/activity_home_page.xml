@@ -25,16 +25,35 @@
             android:textSize="34sp"
             android:textStyle="bold|italic" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/gotopfpic"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:src="@drawable/prfpic_200"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="1dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gotomentorlist"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_baseline_school_24"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="1dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/gotopfpic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="top|center_vertical"
+                android:layout_marginTop="20dp"
+                android:padding="10dp"
+                android:src="@drawable/prfpic_200"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="1dp" />
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/gotopf"
@@ -45,7 +64,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/hmbtn"
-            android:text="Visit Your Profile"
+            android:text="Show Available Mentors"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="20sp" />
@@ -85,7 +104,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@drawable/rgsbtnbg"
-                android:text="Go through Subjects"
+                android:text="Go Through Subjects"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:visibility="invisible"
@@ -115,7 +135,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@drawable/rgsbtnbg"
-                android:text="Go through Subjects"
+                android:text="Go Through Subjects"
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:visibility="invisible"

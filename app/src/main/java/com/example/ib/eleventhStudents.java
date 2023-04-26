@@ -1,21 +1,22 @@
 package com.example.ib;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class eleventhStudents extends AppCompatActivity implements View.OnClickListener{
-
+    private ImageView backbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eleventh_students);
         getSupportActionBar().hide();
-
+        backbtn=findViewById(R.id.imageView);
         TextView Science = findViewById(R.id.tvScience);
         TextView Mathematics = findViewById(R.id.tvMath);
         TextView Studies_In_language_and_literature = findViewById(R.id.tvLang);
@@ -24,7 +25,7 @@ public class eleventhStudents extends AppCompatActivity implements View.OnClickL
         TextView Arts = findViewById(R.id.tvArts);
         TextView PHE = findViewById(R.id.tvPhe);
         TextView Design = findViewById(R.id.tvDesign);
-        TextView Project = findViewById(R.id.tvProjects);
+//        TextView Project = findViewById(R.id.tvProjects);
 
         Science.setOnClickListener(this);
         Mathematics.setOnClickListener(this);
@@ -34,7 +35,16 @@ public class eleventhStudents extends AppCompatActivity implements View.OnClickL
         Arts.setOnClickListener(this);
         PHE.setOnClickListener(this);
         Design.setOnClickListener(this);
-        Project.setOnClickListener(this);
+//        Project.setOnClickListener(this);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(eleventhStudents.this,HomePage.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
 
     }
@@ -45,50 +55,47 @@ public class eleventhStudents extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
             switch (v.getId()){
                 case R.id.tvScience:
-                    Intent intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Science");
-                    startActivity(intent);
+                    Intent gtsc=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/science/"));
+                    startActivity(gtsc);
                       break;
                 case R.id.tvMath:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Math");
-                    startActivity(intent);
+                    Intent gtsm=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/mathematics/"));
+                    startActivity(gtsm);
                     break;
                 case R.id.tvLang:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Language and Literature");
-                    startActivity(intent);
+//                    intent=new Intent(this,SlotActivity.class);
+//                    intent.putExtra("Subject", "Language and Literature");
+//                    startActivity(intent);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/language-and-literature/"));
+                    startActivity(browserIntent);
                     break;
                 case R.id.tvIndividuals:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Individuals and Societies");
-                    startActivity(intent);
+//                    intent=new Intent(this,SlotActivity.class);
+//                    intent.putExtra("Subject", "Individuals and Societies");
+//                    startActivity(intent);
+                    Intent indi=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/individuals-and-societies/"));
+                    startActivity(indi);
                     break;
                 case R.id.tvAcqusition:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Language Acquisition");
-                    startActivity(intent);
+                    Intent bt = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/language-acquisition/"));
+                    startActivity(bt);
                     break;
                 case R.id.tvArts:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "The Arts");
-                    startActivity(intent);
+//                    intent=new Intent(this,SlotActivity.class);
+//                    intent.putExtra("Subject", "The Arts");
+//                    startActivity(intent);
+                    Intent tvarts = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/arts/"));
+                    startActivity(tvarts);
                     break;
                 case R.id.tvPhe:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "PHE");
-                    startActivity(intent);
+                    Intent gtphe = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/physical-and-health-education/"));
+                    startActivity(gtphe);
                     break;
                 case R.id.tvDesign:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Design");
-                    startActivity(intent);
+                    Intent gtdesign = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/design/"));
+                    startActivity(gtdesign);
                     break;
-                case R.id.tvProjects:
-                    intent=new Intent(this,SlotActivity.class);
-                    intent.putExtra("Subject", "Projects");
-                    startActivity(intent);
-                    break;
+
             }
     }
 }

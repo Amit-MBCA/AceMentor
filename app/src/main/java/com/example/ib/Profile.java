@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,7 +39,6 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.Objects;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -64,7 +64,7 @@ public class Profile extends AppCompatActivity {
     private Spinner subjSpinner;
     private Boolean isOn, mentor, isCheck = false;
     public static String PREFS_NAME = "MyPrefsFile";
-
+    private ImageView backbtn;
     private String tempSubject;  // to handle the spinner subject change
 
     @SuppressLint("MissingInflatedId")
@@ -90,7 +90,7 @@ public class Profile extends AppCompatActivity {
         img = shrd1.getString("image_data", "image");
         mentor = shrd1.getBoolean("isMentor", false);
         id = shrd1.getString("ID", "123");
-
+        backbtn=(ImageView) findViewById(R.id.imageView);
         mentorSubject = shrd1.getString("mentorSubject", "Science");
         if (std.equals("11th") || std.equals("12th")) {
             subjAdapter = ArrayAdapter.createFromResource(this, R.array.eSubjSpinner, R.layout.subj_spinner);
@@ -217,6 +217,13 @@ public class Profile extends AppCompatActivity {
             public void onClick(View v) {
                 Intent it = new Intent(Profile.this, Signup.class);
                 startActivity(it);
+            }
+        });
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(Profile.this,HomePage.class);
+                startActivity(it);
                 finish();
             }
         });
@@ -321,5 +328,6 @@ public class Profile extends AppCompatActivity {
                         dialog.setMessage("Uploaded : " + (int) percent + "%");
                     }
                 });
+
     }
 }

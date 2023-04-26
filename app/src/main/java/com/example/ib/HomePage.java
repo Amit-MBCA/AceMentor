@@ -110,7 +110,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isNetworkConnected()) {
-                    Intent intent = new Intent(HomePage.this, eleventhStudents.class);
+                    Intent intent = new Intent(HomePage.this,eleventhStudents.class);
                     startActivity(intent);
                 }
                 else{

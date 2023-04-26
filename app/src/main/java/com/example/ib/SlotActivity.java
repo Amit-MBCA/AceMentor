@@ -1,7 +1,11 @@
 package com.example.ib;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +23,7 @@ public class SlotActivity extends AppCompatActivity {
 
     private SharedPreferences shrd1;
     public static String PREFS_NAME="MyPrefsFile";
+    private ImageView backbtn;
     // std = < fetch the subject value from shared preferences
     String standard = "8";
 
@@ -31,6 +36,7 @@ public class SlotActivity extends AppCompatActivity {
     RecyclerView recview;
     MentorsAdapter adapter;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +45,7 @@ public class SlotActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         Bundle extras = getIntent().getExtras();
         String subject= extras.getString("Subject");
-
+        backbtn=(ImageView) findViewById(R.id.imageView);
         db = FirebaseDatabase.getInstance().getReference().child("Mentors");
 
         recview =(RecyclerView)findViewById(R.id.slotsrv);
@@ -57,7 +63,14 @@ public class SlotActivity extends AppCompatActivity {
 
         adapter = new MentorsAdapter(options);
         recview.setAdapter(adapter);
-
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(SlotActivity.this,HomePage.class);
+                startActivity(it);
+                finish();
+            }
+        });
 
 
                               //<<<<<<<<<< New Adapter setup Using Array of List >>>>>>>>>>>//

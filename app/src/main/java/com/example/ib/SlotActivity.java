@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SlotActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class SlotActivity extends AppCompatActivity {
     RecyclerView recview;
     MentorsAdapter adapter;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +45,8 @@ public class SlotActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slot);
 
         getSupportActionBar().hide();
-        Bundle extras = getIntent().getExtras();
-        String subject= extras.getString("Subject");
+        String subject= "Science";
+
         backbtn=(ImageView) findViewById(R.id.imageView);
         db = FirebaseDatabase.getInstance().getReference().child("Mentors");
 
@@ -58,7 +60,7 @@ public class SlotActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Mentors> options =
                 new FirebaseRecyclerOptions.Builder<Mentors>()
-                        .setQuery(bookQuery, Mentors.class)
+                        .setQuery(bookQuery,Mentors.class)
                         .build();
 
         adapter = new MentorsAdapter(options);

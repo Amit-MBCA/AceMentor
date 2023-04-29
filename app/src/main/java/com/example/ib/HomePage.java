@@ -65,7 +65,7 @@ public class HomePage extends AppCompatActivity {
         gtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(HomePage.this,Profile.class);
+                Intent it=new Intent(HomePage.this,SlotActivity.class);
                 startActivity(it);
                 finish();
             }

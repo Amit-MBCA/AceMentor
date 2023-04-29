@@ -29,8 +29,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -50,7 +53,7 @@ public class Profile extends AppCompatActivity {
     Uri uri;
 
 
-    private String user, mail, std, img, mentSubj = "a", mentorSubject, id;
+    private String user, mail, std, img, mentSubj, mentorSubject, id;
     private TextView tvname, tvemail, tvstd, tvSelectSubj;
     private CircleImageView pimg;
     private boolean check;
@@ -176,22 +179,24 @@ public class Profile extends AppCompatActivity {
 
 
                 //to handle the selection of another subject as mentor
-                if (tempSubject != mentSubj) {
+                if (!tempSubject.equals(mentorSubject)) {
                     DeleteFromFirebase(tempSubject);
+                    Log.d(TAG, "delete method called from the spineer chanage ");
                 }
 
                 //to handle the mentor switch
                 if (isCheck) {
                     editor.putBoolean("isMentor", true);
                     editor.putString("mentorSubject", mentSubj);
-                    //Data upload to firebase
+
+                    //DataUpload method call
                     uploadToFirebase();
 
                 } else {
                     editor.putBoolean("isMentor", false);
                     editor.putString("mentorSubject", null);
                     editor.apply();
-
+                    Log.d(TAG, "delete method called due to checker change");
                     DeleteFromFirebase(mentSubj);
                 }
 
@@ -226,16 +231,55 @@ public class Profile extends AppCompatActivity {
 
     /// Function to delete the data from the firebase database
     private void DeleteFromFirebase(String mentorDeleteSubject) {
-        DatabaseReference nodeRef = FirebaseDatabase.getInstance().getReference("Mentors");
-        nodeRef.child(mentorDeleteSubject).child(id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+        Log.d(TAG, "Delete From Firebase method called");
+        DatabaseReference nodeRef = FirebaseDatabase.getInstance().getReference("Mentors").child(mentorDeleteSubject).child(id);
+
+        nodeRef.child("img").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "Node deleted successfully");
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String imageUrl = snapshot.getValue(String.class);
+
+                if (imageUrl != null && !imageUrl.isEmpty() && !imageUrl.equals("null")) {
+                    //storage reference
+                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageUrl);
+
+
+                    /////<<< Deleting the real time data of mentor from the database >>>> /////
+                    nodeRef.removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "Node deleted successfully");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e(TAG, "Error deleting node", e);
+                        }
+                    });
+
+
+                    ////<<<< Deleting the storage data from firebase >>>>////
+                    storageReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // image deleted successfully
+                            Log.d(TAG, "Image deleted successfully from storage");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // handle error
+                            Log.e(TAG, "Error deleting image from storage", e);
+                        }
+                    });
+                } else {
+                    return;
+                }
             }
-        }).addOnFailureListener(new OnFailureListener() {
+
             @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(TAG, "Error deleting node", e);
+            public void onCancelled(@NonNull DatabaseError error) {
+                // handle error
             }
         });
     }
@@ -268,6 +312,7 @@ public class Profile extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();
+                                        Log.d(TAG, "Node added successfully");
                                     }
                                 });
 

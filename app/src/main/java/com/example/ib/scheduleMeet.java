@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
@@ -29,7 +30,7 @@ public class scheduleMeet extends AppCompatActivity {
     private int selectedhours=0;
     private ImageView backbtn;
     private String am_pm="am",query;
-    private String currentDay,selectedDay="2040/04/30";
+    private String currentDay,selectedTime,selectedDay="2040/04/30";
     private int upcompingday=1;
 
 
@@ -129,10 +130,17 @@ public class scheduleMeet extends AppCompatActivity {
                                 // in our text view.
                                 am_pm = hourOfDay < 12 ? "AM" : "PM";
                                 selectedhours=hourOfDay;
-                                if(hourOfDay==12)
+
+                                if(hourOfDay==12){
                                     pickTime.setText(hourOfDay + ":" + minute + " " + am_pm);
-                                else
+                                    selectedTime=hourOfDay + ":" + minute + " " + am_pm;
+                                }
+
+                                else{
                                     pickTime.setText(hourOfDay%12 + ":" + minute + " " + am_pm);
+                                    selectedTime=hourOfDay%12 + ":" + minute + " " + am_pm;
+                                }
+
                             }
                         }, hour, minute, false);
                 // at last we are calling show to
@@ -166,8 +174,8 @@ public class scheduleMeet extends AppCompatActivity {
                                 intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + "Subject Name" + ". I will be very grateful if you provide your valuable time. \n\n"
                                         + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
                                         "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + "UserName");
-
-
+                                intent.setType("sms/rfc822");
+                                startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), 800);
                                 if (intent.resolveActivity(getPackageManager()) != null) {
                                     v.getContext().startActivity(Intent.createChooser(intent, "Choose an email app"));
                                 } else {
@@ -223,5 +231,24 @@ public class scheduleMeet extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void startActivityForResult(@NonNull Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        if(requestCode== 800){
+            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+            it.putExtra("selectedDate",selectedDay);
+            startActivity(it);
+            finish();
+        }
+    }
+    //    @Override
+//    protected void startActivityForResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == 800) {
+//            //Called when returning from your email intent
+//            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+//            startActivity(it);
+//        }
+//    }
 
 }

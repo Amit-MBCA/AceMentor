@@ -45,7 +45,11 @@ public class SlotActivity extends AppCompatActivity {
         setContentView(R.layout.activity_slot);
 
         getSupportActionBar().hide();
-        String subject= "Science";
+
+        String subject= "The Arts";
+
+        Intent intent = getIntent();
+        String std = intent.getStringExtra("10th");
 
         backbtn=(ImageView) findViewById(R.id.imageView);
         db = FirebaseDatabase.getInstance().getReference().child("Mentors");
@@ -53,10 +57,12 @@ public class SlotActivity extends AppCompatActivity {
         recview =(RecyclerView)findViewById(R.id.slotsrv);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
+
+
         Query bookQuery= FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child("Mentors").child(subject).orderByChild("user");
+                .child("Mentors").child(subject).orderByChild("std").startAt(std);
 
         FirebaseRecyclerOptions<Mentors> options =
                 new FirebaseRecyclerOptions.Builder<Mentors>()
@@ -73,6 +79,8 @@ public class SlotActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
                               //<<<<<<<<<< New Adapter setup Using Array of List >>>>>>>>>>>//

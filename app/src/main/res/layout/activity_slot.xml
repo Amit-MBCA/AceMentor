@@ -7,12 +7,6 @@
     android:orientation="vertical"
     tools:context=".SlotActivity">
 
-<!--    <ProgressBar-->
-<!--        android:id="@+id/progressCircular"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_vertical" />-->
-
     <TextView
         android:id="@+id/textView7"
         android:layout_width="match_parent"
@@ -33,6 +27,13 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/slotsrv"

@@ -60,6 +60,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent it=new Intent(HomePage.this,Profile.class);
+                it.putExtra("Standard",std);
                 startActivity(it);
             }
         });

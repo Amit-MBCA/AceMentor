@@ -62,7 +62,7 @@
         android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="35dp"
-        app:srcCompat="@drawable/back_48" />
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/ic_baseline_home_48" />
 </LinearLayout>

@@ -23,10 +23,8 @@ public class mConfirmed extends AppCompatActivity {
         backbtn=findViewById(R.id.imageView);
         showDate=findViewById(R.id.showDate);
         Intent it=getIntent();
-        day=it.getIntExtra("day",day);
-        month=it.getIntExtra("month",month);
-        year=it.getIntExtra("year",year);
-        date=day+"-"+month+"-"+year;
+        date=it.getStringExtra("selectedDate");
+//        int trynum=it.getIntExtra("trynum",10);
         showDate.setText(date);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,5 +34,11 @@ public class mConfirmed extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(mConfirmed.this,HomePage.class));
     }
 }

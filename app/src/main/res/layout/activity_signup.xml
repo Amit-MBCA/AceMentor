@@ -80,7 +80,7 @@
             android:ems="10"
             android:hint="Your email"
             android:inputType="textPersonName|textEmailSubject"
-            android:maxLength="30"
+            android:maxLength="40"
             android:minHeight="48dp"
             android:paddingLeft="10dp"
             android:textAlignment="center" />

@@ -15,17 +15,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
-    private int day;
+    private int day,currentMonth=0;
     private int month;
     private int year;
     private Button getForm;
-    private int iday,itime;
+    private int selectedhours=0;
     private ImageView backbtn;
-    private String am_pm="am";
+    private String am_pm="am",query;
+    private String currentDay,selectedDay="2040/04/30";
+    private int upcompingday=1;
 
 
     @Override
@@ -38,8 +43,6 @@ public class scheduleMeet extends AppCompatActivity {
         String MentorEmail = extras.getString("email");
         String[] addresses = {MentorEmail};
 
-
-
         pickDay = findViewById(R.id.pickday);
         pickTime = findViewById(R.id.picktime);
         getQuery = findViewById(R.id.getQuery);
@@ -48,6 +51,7 @@ public class scheduleMeet extends AppCompatActivity {
 //        itime=Integer.parseInt(pickTime.getText().toString());
 //        day=Integer.toString(iday);
 //        time=Integer.toString(itime);
+        currentDay= new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
         backbtn=findViewById(R.id.imageView);
         // on below line we are adding click listener for our pick date button
         pickDay.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +75,27 @@ public class scheduleMeet extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
                                 // on below line we are setting date to our text view.
-                                pickDay.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                int moy=monthOfYear+1;
+                                currentMonth=moy;
+
+                                if(dayOfMonth<10||moy<10){
+                                    if(dayOfMonth<10 && moy<10){
+                                        selectedDay = year + "/0" + moy + "/0" + dayOfMonth;
+                                        pickDay.setText(selectedDay);
+                                    }
+                                    else if(dayOfMonth<10) {
+                                        selectedDay = year + "/0" + moy + "/" + dayOfMonth;
+                                        pickDay.setText(selectedDay);
+                                    }
+                                    else{
+                                        selectedDay = year + "/0" + moy + "/" + dayOfMonth;
+                                        pickDay.setText(selectedDay);
+                                    }
+                                }
+                                else{
+                                    selectedDay = year + "/" + moy + "/" + dayOfMonth;
+                                    pickDay.setText(selectedDay);
+                                }
 
                             }
                         },
@@ -104,7 +128,11 @@ public class scheduleMeet extends AppCompatActivity {
                                 // on below line we are setting selected time
                                 // in our text view.
                                 am_pm = hourOfDay < 12 ? "AM" : "PM";
-                                pickTime.setText(hourOfDay + ":" + minute + " " + am_pm);
+                                selectedhours=hourOfDay;
+                                if(hourOfDay==12)
+                                    pickTime.setText(hourOfDay + ":" + minute + " " + am_pm);
+                                else
+                                    pickTime.setText(hourOfDay%12 + ":" + minute + " " + am_pm);
                             }
                         }, hour, minute, false);
                 // at last we are calling show to
@@ -115,22 +143,53 @@ public class scheduleMeet extends AppCompatActivity {
         getForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (!(am_pm.equals("am"))) {
-                    Intent intent = new Intent(Intent.ACTION_SENDTO);
-                    intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-                    intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "Mentor Guidance");
-                    intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + "Subject Name" + ". I will be very grateful if you provide your valuable time. \n\n"
-                            + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
-                            "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + "UserName");
+                query=getQuery.getText().toString();
+//                SimpleDateFormat dtobj = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                try {
+//                    Date cd= dtobj.parse(currentDay);
+//                    Date sd=dtobj.parse(selectedDay);
+//                    upcompingday=sd.compareTo(cd);
+//
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+                int upcompingday=selectedDay.compareTo(currentDay);
+                if (!(am_pm.equals("am"))&&!(currentMonth==0)) {
+                    if(selectedhours>7&&selectedhours<18) {
+                        if(!(query.isEmpty())) {
+                            if (upcompingday == 1) {
+                                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                                intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Mentor Guidance");
+                                intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + "Subject Name" + ". I will be very grateful if you provide your valuable time. \n\n"
+                                        + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
+                                        "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + "UserName");
 
 
-                    if (intent.resolveActivity(getPackageManager()) != null) {
-                        v.getContext().startActivity(Intent.createChooser(intent, "Choose an email app"));
-                    } else {
-                        Toast.makeText(scheduleMeet.this, "No App is Installed", Toast.LENGTH_LONG).show();
+                                if (intent.resolveActivity(getPackageManager()) != null) {
+                                    v.getContext().startActivity(Intent.createChooser(intent, "Choose an email app"));
+                                } else {
+                                    Toast.makeText(scheduleMeet.this, "No App is Installed", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                            else{
+                                Toast.makeText(scheduleMeet.this, "Select upcoming day", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        else{
+                            Toast.makeText(scheduleMeet.this,"Please tell us how we can assist you",Toast.LENGTH_SHORT).show();
+                        }
                     }
-
+                    else{
+                        Toast.makeText(scheduleMeet.this,"Select time according to working hours",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(scheduleMeet.this,"Please select date and time",Toast.LENGTH_SHORT).show();
+                }
 //                // Create the email activity result launcher
 //                ActivityResultLauncher<Intent> emailLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
 //                        result -> {

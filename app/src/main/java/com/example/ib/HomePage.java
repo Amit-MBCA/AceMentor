@@ -18,9 +18,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class HomePage extends AppCompatActivity {
     private SharedPreferences shrd1;
     private String img,std;
-    private AppCompatButton gtp,gts,gts11;
+    private AppCompatButton gtmlbtn,gts,gts11;
     Uri uri;
-    CircleImageView civ,subimg,subimg11;
+    CircleImageView civ,subimg,subimg11,gtmli;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,8 @@ public class HomePage extends AppCompatActivity {
         std=shrd1.getString("selectedStd","8th");
 
         civ=findViewById(R.id.gotopfpic);
-        gtp=findViewById(R.id.gotopf);
+        gtmlbtn=findViewById(R.id.gotomentorlistbtn);
+        gtmli=findViewById(R.id.gotomentorlist);
         gts11=findViewById(R.id.subbtn2);
         subimg11=findViewById(R.id.subimg2);
 
@@ -62,12 +63,28 @@ public class HomePage extends AppCompatActivity {
                 startActivity(it);
             }
         });
-        gtp.setOnClickListener(new View.OnClickListener() {
+        gtmlbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(HomePage.this,SlotActivity.class);
-                startActivity(it);
-                finish();
+                if(isNetworkConnected()) {
+                    Intent it = new Intent(HomePage.this, SlotActivity.class);
+                    startActivity(it);
+                }
+                else{
+                    Toast.makeText(HomePage.this,"Check your internet connection",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        gtmli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isNetworkConnected()) {
+                    Intent it = new Intent(HomePage.this, SlotActivity.class);
+                    startActivity(it);
+                }
+                else{
+                    Toast.makeText(HomePage.this,"Check your internet connection",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         subimg.setOnClickListener(new View.OnClickListener() {

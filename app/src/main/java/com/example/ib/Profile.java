@@ -49,6 +49,8 @@ public class Profile extends AppCompatActivity {
     FirebaseDatabase db;
     DatabaseReference reference;
 
+    Integer tempStandard;
+
     Bitmap bitmap;
     Uri uri;
 
@@ -290,6 +292,24 @@ public class Profile extends AppCompatActivity {
         dialog.setTitle("File Uploader");
         dialog.show();
 
+        //temp standard of student (int type)
+        switch(std){
+            case "8th":
+                tempStandard=8;
+                break;
+            case "9th":
+                tempStandard=9;
+                break;
+            case "10th":
+                tempStandard=10;
+                break;
+            case "11th":
+                tempStandard=11;
+                break;
+            default:
+                tempStandard=12;
+        }
+
         //Firebase storage reference
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference uploader = storage.getReference("Image" + new Random().nextInt(50));
@@ -303,7 +323,7 @@ public class Profile extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 dialog.dismiss();
                                 ///Reference of Mentor class
-                                Mentors mentors = new Mentors(user, mail, std, uri.toString(), mentSubj);
+                                Mentors mentors = new Mentors(user, mail, tempStandard, uri.toString(), mentSubj);
 
                                 //Realtime database setup
                                 db = FirebaseDatabase.getInstance();

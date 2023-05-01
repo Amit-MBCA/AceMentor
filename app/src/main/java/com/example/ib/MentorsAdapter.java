@@ -42,7 +42,7 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
         holder.discription.setText(model.getMail());
         holder.subject.setText(model.getMentSubj());
         Glide.with(holder.img.getContext()).load(model.getImg()).into(holder.img);
-        holder.standard.setText(model.getStd());
+        holder.standard.setText(model.getStd().toString());
 
         // Add click listener to send email to selected mentors
         holder.slot.setOnClickListener(new View.OnClickListener() {
@@ -75,13 +75,13 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            progressBar = itemView.findViewById(R.id.progressBar);
+//            progressBar = itemView.findViewById(R.id.progressBar);
             img =(CircleImageView)itemView.findViewById(R.id.profpic);
             name = (TextView) itemView.findViewById(R.id.mentorName);
             discription = (TextView) itemView.findViewById(R.id.mentorMail);
             slot = (Button) itemView.findViewById(R.id.viewSlotBtn);
             subject = (TextView) itemView.findViewById(R.id.mentorSubj);
-            standard = itemView.findViewById(R.id.mentorStd);
+            standard = (TextView) itemView.findViewById(R.id.mentorStd);
         }
     }
 

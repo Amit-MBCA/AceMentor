@@ -39,6 +39,8 @@ public class scheduleMeet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_meet);
         getSupportActionBar().hide();
+
+
         //get intent data from the MentorsAdapter
         Bundle extras = getIntent().getExtras();
         String MentorEmail = extras.getString("email");
@@ -174,7 +176,7 @@ public class scheduleMeet extends AppCompatActivity {
                                 intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + "Subject Name" + ". I will be very grateful if you provide your valuable time. \n\n"
                                         + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
                                         "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + "UserName");
-                                intent.setType("sms/rfc822");
+                                intent.setType("message/rfc822");
                                 startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), 800);
                                 if (intent.resolveActivity(getPackageManager()) != null) {
                                     v.getContext().startActivity(Intent.createChooser(intent, "Choose an email app"));
@@ -198,6 +200,8 @@ public class scheduleMeet extends AppCompatActivity {
                 else{
                     Toast.makeText(scheduleMeet.this,"Please select date and time",Toast.LENGTH_SHORT).show();
                 }
+
+
 //                // Create the email activity result launcher
 //                ActivityResultLauncher<Intent> emailLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
 //                        result -> {

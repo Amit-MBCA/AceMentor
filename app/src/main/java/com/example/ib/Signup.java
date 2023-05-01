@@ -62,9 +62,6 @@ public class Signup extends AppCompatActivity {
             }
         });
         SharedPreferences shrd1=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
-        String tempID = shrd1.getString("ID","123");
-
-        id = tempID;
 
         SharedPreferences.Editor editor1=shrd1.edit();
         hasSignedup=shrd1.getBoolean("hasSignedUp",false);
@@ -117,6 +114,7 @@ public class Signup extends AppCompatActivity {
                         editor.putBoolean("hasSignedUp",true);
                         editor.apply();
                         Intent it = new Intent(Signup.this, HomePage.class);
+                        it.putExtra("ID",id);
 //                        setResult(Activity.RESULT_OK,it);
                         startActivity(it);
                         finish();

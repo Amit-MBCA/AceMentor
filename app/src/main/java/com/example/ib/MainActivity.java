@@ -19,8 +19,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         shrd=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
         hasSignedUp=shrd.getBoolean("hasSignedUp",false);
+
+        String id = shrd.getString("ID","123");
         if(hasSignedUp){
             Intent it=new Intent(MainActivity.this,HomePage.class);
+            it.putExtra("ID",id);
             startActivity(it);
             finish();
         }

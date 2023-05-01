@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,16 +28,15 @@ import java.util.List;
 public class SlotActivity extends AppCompatActivity {
 
     private SharedPreferences shrd1;
-    public static String PREFS_NAME="MyPrefsFile";
-    private ImageView backbtn;
+    public static String PREFS_NAME = "MyPrefsFile";
+    FloatingActionButton backbtn;
     // std = < fetch the subject value from shared preferences
     String standard = "8";
 
-
     List<Mentors> mentorsList = new ArrayList<>();
-    DatabaseReference db;
 
-    
+    Integer tempStandard;
+
     //Recycler View
     RecyclerView recview;
     MentorsAdapter adapter;
@@ -46,81 +50,85 @@ public class SlotActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        String subject= "The Arts";
-
         Intent intent = getIntent();
-        String std = intent.getStringExtra("10th");
+        String studentStd = intent.getStringExtra("Standard");     //user standard
+        String subject = intent.getStringExtra("Subject");                                      //user selected subject
 
-        backbtn=(ImageView) findViewById(R.id.imageView);
-        db = FirebaseDatabase.getInstance().getReference().child("Mentors");
 
-        recview =(RecyclerView)findViewById(R.id.slotsrv);
+
+        //temp standard of student (int type)
+        switch (studentStd) {
+            case "8th":
+                tempStandard = 8;
+                break;
+            case "9th":
+                tempStandard = 9;
+                break;
+            case "10th":
+                tempStandard = 10;
+                break;
+            case "11th":
+                tempStandard = 11;
+                break;
+            default:
+                tempStandard = 12;
+        }
+
+        backbtn = (FloatingActionButton) findViewById(R.id.floating_back_button);
+
+//        List<Mentors> mentorList = new ArrayList<>();
+
+        recview = (RecyclerView) findViewById(R.id.slotsrv);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
+//        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
+        // attach a ValueEventListener to the query to traverse all subjects and mentor IDs
+//        db.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+
+//                if (dataSnapshot != null) {
+//                    for (DataSnapshot mentorSnapshot : dataSnapshot.getChildren()) {
+//                        for (DataSnapshot subjectSnapshot : mentorSnapshot.getChildren()) {
+//                            for (DataSnapshot studentID : subjectSnapshot.getChildren()) {
+//                                // do something with each student snapshot
+//                                Mentors mentor = studentID.getValue(Mentors.class);
+//                                mentorList.add(mentor);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                // handle database error
+//            }
+//        });
 
 
         Query bookQuery= FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child("Mentors").child(subject).orderByChild("std").startAt(std);
+                .child("Mentors").child(subject).orderByChild("std").startAt(tempStandard + 1);
 
         FirebaseRecyclerOptions<Mentors> options =
                 new FirebaseRecyclerOptions.Builder<Mentors>()
-                        .setQuery(bookQuery,Mentors.class)
+                        .setQuery(bookQuery, Mentors.class)
                         .build();
+
 
         adapter = new MentorsAdapter(options);
         recview.setAdapter(adapter);
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(SlotActivity.this,HomePage.class);
+                Intent it = new Intent(SlotActivity.this, HomePage.class);
                 startActivity(it);
                 finish();
             }
         });
-
-
-
-
-                              //<<<<<<<<<< New Adapter setup Using Array of List >>>>>>>>>>>//
-
-//        adapter = new MentorsAdapter(mentorsList,this);
-//
-//        db.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//                Mentors pojo = dataSnapshot.getValue(Mentors.class);
-//                adapter.notifyDataSetChanged();
-//                if (pojo.mentSubj == "Science" ){
-//                    mentorsList.add(pojo);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
-//
-//            }
-//        });
-//        adapter.notifyDataSetChanged();
-//        recview.setAdapter(adapter);
-                                //<<<<<<<<<< New Adapter setup Using Array of List >>>>>>>>>>>//
     }
 
 

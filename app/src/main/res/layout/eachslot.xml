@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="3"
                 android:orientation="vertical">
 
@@ -51,7 +52,7 @@
                     android:maxLines="1"
                     android:text="Science"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="#EA0A0A"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.116"

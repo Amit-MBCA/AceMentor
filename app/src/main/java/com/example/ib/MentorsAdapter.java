@@ -29,11 +29,20 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
     }
 
     @Override
+    public void onDataChanged() {
+        if(progressBar != null){
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, int position, @NonNull Mentors model) {
 
         holder.name.setText(model.getUser());
         holder.discription.setText(model.getMail());
+        holder.subject.setText(model.getMentSubj());
         Glide.with(holder.img.getContext()).load(model.getImg()).into(holder.img);
+        holder.standard.setText(model.getStd().toString());
 
         // Add click listener to send email to selected mentors
         holder.slot.setOnClickListener(new View.OnClickListener() {
@@ -61,25 +70,21 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
     /// my view holder class
     class myViewHolder extends RecyclerView.ViewHolder{
         CircleImageView img;
-        TextView name, discription;
+        TextView name, discription,subject, standard;
         Button slot;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-//            progressBar = (ProgressBar)itemView.findViewById(R.id.progressCircular);
+//            progressBar = itemView.findViewById(R.id.progressBar);
             img =(CircleImageView)itemView.findViewById(R.id.profpic);
             name = (TextView) itemView.findViewById(R.id.mentorName);
             discription = (TextView) itemView.findViewById(R.id.mentorMail);
             slot = (Button) itemView.findViewById(R.id.viewSlotBtn);
+            subject = (TextView) itemView.findViewById(R.id.mentorSubj);
+            standard = (TextView) itemView.findViewById(R.id.mentorStd);
         }
     }
 
-//    @Override
-//    public void onDataChanged() {
-//        if(progressBar != null){
-//            progressBar.setVisibility(View.INVISIBLE);
-//        }
-//    }
 
 }
 

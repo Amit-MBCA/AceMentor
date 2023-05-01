@@ -1,11 +1,12 @@
 package com.example.ib;
 
 public class Mentors {
-    String user,mail,std,img, mentSubj;
+    String user,mail,img, mentSubj;
+    Integer std;
 
     public Mentors() {
     }
-    public Mentors(String user, String mail, String std, String img, String mentSubj) {
+    public Mentors(String user, String mail, Integer std, String img, String mentSubj) {
         this.user = user;
         this.mail = mail;
         this.std = std;
@@ -30,11 +31,11 @@ public class Mentors {
         this.mail = mail;
     }
 
-    public String getStd() {
+    public Integer getStd() {
         return std;
     }
 
-    public void setStd(String std) {
+    public void setStd(Integer std) {
         this.std = std;
     }
 

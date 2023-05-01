@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="IB MYP"
+        android:text="IB Diploma"
         android:textAlignment="center"
         android:textColor="@color/primaryColor"
         android:textSize="34sp"
@@ -51,6 +55,8 @@
             android:layout_weight="1"
             android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
             android:paddingBottom="15dp"
@@ -71,6 +77,8 @@
             android:layout_weight="1"
             android:background="@drawable/tvsubjectsbg"
             android:paddingLeft="25dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:paddingTop="15dp"
             android:paddingRight="25dp"
             android:paddingBottom="15dp"
@@ -227,7 +235,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginBottom="35dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="20dp"
         app:srcCompat="@drawable/back_48" />
 </LinearLayout>
+</ScrollView>

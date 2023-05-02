@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import Api.JavaMailAPI;
+
 public class mConfirmed extends AppCompatActivity {
-    private String date;
+    private String date,userMail;
     private int day,month,year;
     private TextView showDate;
     private ImageView backbtn;
@@ -24,8 +26,14 @@ public class mConfirmed extends AppCompatActivity {
         showDate=findViewById(R.id.showDate);
         Intent it=getIntent();
         date=it.getStringExtra("selectedDate");
+        userMail = it.getStringExtra("UserMail");
+
 //        int trynum=it.getIntExtra("trynum",10);
         showDate.setText(date);
+
+        sendMail(userMail);         /// <<<< To send confirmation mail to user >>>>///
+
+
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,5 +48,15 @@ public class mConfirmed extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(mConfirmed.this,HomePage.class));
+    }
+
+
+    private void sendMail(String userMail) {
+        String subject = "Confirmation Mail";
+        String message = "Your Request for mentor support is sent to your selected mentor.";
+
+        JavaMailAPI javaMailAPI = new JavaMailAPI(this, userMail,subject,message);
+
+        javaMailAPI.execute();
     }
 }

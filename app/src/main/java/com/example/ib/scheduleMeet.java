@@ -3,6 +3,7 @@ package com.example.ib;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import Api.JavaMailAPI;
+
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
     private int day,currentMonth=0;
@@ -30,8 +33,11 @@ public class scheduleMeet extends AppCompatActivity {
     private int selectedhours=0;
     private ImageView backbtn;
     private String am_pm="am",query;
-    private String currentDay,selectedTime,selectedDay="2040/04/30";
+    private String currentDay,selectedTime,selectedDay="2040/04/30", userMail;
     private int upcompingday=1;
+
+    public static String PREFS_NAME = "MyPrefsFile";
+
 
 
     @Override
@@ -39,6 +45,9 @@ public class scheduleMeet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_meet);
         getSupportActionBar().hide();
+
+        SharedPreferences shrd1=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
+        userMail = shrd1.getString("uEmail", "User Mail");
 
 
         //get intent data from the MentorsAdapter
@@ -221,6 +230,7 @@ public class scheduleMeet extends AppCompatActivity {
 //                else{
 //                    Toast.makeText(getApplicationContext(), "Please select time and day", Toast.LENGTH_SHORT).show();
 //                }
+
             }
 
 
@@ -241,18 +251,11 @@ public class scheduleMeet extends AppCompatActivity {
         if(requestCode== 800){
             Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
             it.putExtra("selectedDate",selectedDay);
+            it.putExtra("UserMail",userMail);
             startActivity(it);
             finish();
         }
     }
-    //    @Override
-//    protected void startActivityForResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == 800) {
-//            //Called when returning from your email intent
-//            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
-//            startActivity(it);
-//        }
-//    }
+
 
 }

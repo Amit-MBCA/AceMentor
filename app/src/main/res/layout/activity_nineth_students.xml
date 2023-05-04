@@ -50,14 +50,11 @@
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:background="@drawable/tvsubjectsbg"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
+            android:padding="10dp"
             android:text="Sciences"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvMath"
@@ -70,14 +67,11 @@
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:background="@drawable/tvsubjectsbg"
-            android:paddingLeft="25dp"
-            android:paddingTop="15dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="15dp"
+            android:padding="10dp"
             android:text="Mathematics"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -88,14 +82,11 @@
         android:layout_gravity="center"
         android:layout_margin="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="15dp"
+        android:padding="10dp"
         android:text="Studies in language and literature"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvIndividuals"
@@ -104,14 +95,11 @@
         android:layout_gravity="center"
         android:layout_margin="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="15dp"
+        android:padding="10dp"
         android:text="Individuals and societies"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvAcqusition"
@@ -120,14 +108,11 @@
         android:layout_gravity="center"
         android:layout_margin="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="15dp"
+        android:padding="10dp"
         android:text="Language Acquisition"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/tvArts"
@@ -136,14 +121,11 @@
         android:layout_gravity="center"
         android:layout_margin="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingRight="25dp"
-        android:paddingBottom="15dp"
+        android:padding="10dp"
         android:text="The arts"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
 <!--    <TextView-->
 <!--        android:id="@+id/tvCore"-->
@@ -160,12 +142,19 @@
 <!--        android:textAlignment="center"-->
 <!--        android:textColor="#000000"-->
 <!--        android:textSize="18sp" />-->
-    <ImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/imageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|start"
-        app:srcCompat="@drawable/back_48" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="30dp"
+        android:scaleType="center"
+        app:backgroundTint="@color/white"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
+        app:tint="@color/primaryColor"
+        tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>

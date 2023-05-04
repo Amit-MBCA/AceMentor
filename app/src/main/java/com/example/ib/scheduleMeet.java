@@ -17,12 +17,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import Api.JavaMailAPI;
 
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
@@ -163,17 +162,17 @@ public class scheduleMeet extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 query=getQuery.getText().toString();
-//                SimpleDateFormat dtobj = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dtobj = new SimpleDateFormat("yyyy/MM/dd");
 //
-//                try {
-//                    Date cd= dtobj.parse(currentDay);
-//                    Date sd=dtobj.parse(selectedDay);
-//                    upcompingday=sd.compareTo(cd);
-//
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-                int upcompingday=selectedDay.compareTo(currentDay);
+                try {
+                    Date cd= dtobj.parse(currentDay);
+                    Date sd=dtobj.parse(selectedDay);
+                    upcompingday=sd.compareTo(cd);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+//                int upcompingday=selectedDay.compareTo(currentDay);
                 if (!(am_pm.equals("am"))&&!(currentMonth==0)) {
                     if(selectedhours>7&&selectedhours<18) {
                         if(!(query.isEmpty())) {

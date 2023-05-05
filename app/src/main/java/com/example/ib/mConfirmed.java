@@ -31,7 +31,7 @@ public class mConfirmed extends AppCompatActivity {
 //        int trynum=it.getIntExtra("trynum",10);
         showDate.setText(date);
 
-        sendMail(userMail);         /// <<<< To send confirmation mail to user >>>>///
+      //  sendMail(userMail);         /// <<<< To send confirmation mail to user >>>>///
 
 
         backbtn.setOnClickListener(new View.OnClickListener() {

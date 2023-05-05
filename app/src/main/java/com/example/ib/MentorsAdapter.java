@@ -50,9 +50,14 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
             @Override
             public void onClick(View v) {
                 String recipientMail = model.getMail();
+                String MentorName = model.getUser();
+                String MentorSubject = model.getMentSubj();
 
                 Intent intent = new Intent(v.getContext(), scheduleMeet.class);
                 intent.putExtra("email", recipientMail);
+                intent.putExtra("mentorName",MentorName);
+                intent.putExtra("mentorSubject",MentorSubject);
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 v.getContext().startActivity(intent);
 

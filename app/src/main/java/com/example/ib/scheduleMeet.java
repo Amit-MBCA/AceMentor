@@ -1,9 +1,11 @@
 package com.example.ib;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import Api.JavaMailAPI;
@@ -27,13 +30,13 @@ import Api.JavaMailAPI;
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
     private int day,currentMonth=0;
-    private int month;
+    private int month , requestCode = 1;
     private int year;
     private Button getForm;
     private int selectedhours=0;
     private ImageView backbtn;
     private String am_pm="am",query;
-    private String currentDay,selectedTime,selectedDay="2040/04/30", userMail;
+    private String currentDay,selectedTime,selectedDay="2040/04/30", userMail, userName;
     private int upcompingday=1;
 
     public static String PREFS_NAME = "MyPrefsFile";
@@ -48,12 +51,19 @@ public class scheduleMeet extends AppCompatActivity {
 
         SharedPreferences shrd1=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
         userMail = shrd1.getString("uEmail", "User Mail");
+        userName = shrd1.getString("uName","User Name");
+
+
 
 
         //get intent data from the MentorsAdapter
         Bundle extras = getIntent().getExtras();
         String MentorEmail = extras.getString("email");
+        String MentorName = extras.getString("MentorName");
+        String MentorSubject = extras.getString("mentorSubject");
+
         String[] addresses = {MentorEmail};
+        String[] cc = {userMail};
 
         pickDay = findViewById(R.id.pickday);
         pickTime = findViewById(R.id.picktime);
@@ -179,19 +189,27 @@ public class scheduleMeet extends AppCompatActivity {
                         if(!(query.isEmpty())) {
                             if (upcompingday == 1) {
                                 Intent intent = new Intent(Intent.ACTION_SENDTO);
-                                intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+                                intent.setData(Uri.parse("mailto:")); // Only email apps handle this.
                                 intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+                                intent.putExtra(Intent.EXTRA_CC, cc);
                                 intent.putExtra(Intent.EXTRA_SUBJECT, "Mentor Guidance");
-                                intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + "Subject Name" + ". I will be very grateful if you provide your valuable time. \n\n"
+                                intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + MentorSubject + ". I will be very grateful if you provide your valuable time. \n\n"
                                         + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
-                                        "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + "UserName");
-                                intent.setType("message/rfc822");
-                                startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), 800);
+                                        "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + userName);
+
                                 if (intent.resolveActivity(getPackageManager()) != null) {
-                                    v.getContext().startActivity(Intent.createChooser(intent, "Choose an email app"));
-                                } else {
-                                    Toast.makeText(scheduleMeet.this, "No App is Installed", Toast.LENGTH_LONG).show();
+                                    startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), requestCode);
                                 }
+                                else{
+                                    Toast.makeText(scheduleMeet.this,"no apps present in your phone",Toast.LENGTH_SHORT).show();
+                                }
+
+//                                List<ResolveInfo> resolveInfos = getPackageManager().queryIntentActivities(intent, 0);
+//                                if (resolveInfos.size() > 0) {
+//                                    startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), requestCode);
+//                                } else {
+//                                    Toast.makeText(scheduleMeet.this, "No App is Installed", Toast.LENGTH_LONG).show();
+//                                }
                             }
                             else{
                                 Toast.makeText(scheduleMeet.this, "Select upcoming day", Toast.LENGTH_LONG).show();
@@ -245,17 +263,30 @@ public class scheduleMeet extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void startActivityForResult(@NonNull Intent intent, int requestCode) {
-        super.startActivityForResult(intent, requestCode);
-        if(requestCode== 800){
-            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
-            it.putExtra("selectedDate",selectedDay);
-            it.putExtra("UserMail",userMail);
-            startActivity(it);
-            finish();
-        }
-    }
+//    @Override
+//    public void startActivityForResult(@NonNull Intent intent, int requestCode) {
+//        super.startActivityForResult(intent, requestCode);
+//        if(requestCode== 800){
+//            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+//            it.putExtra("selectedDate",selectedDay);
+//            it.putExtra("UserMail",userMail);
+//            startActivity(it);
+//            finish();
+//        }
+//    }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+
+                Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+                it.putExtra("selectedDate",selectedDay);
+                it.putExtra("UserMail",userMail);
+                startActivity(it);
+        }
+    } //onActivityResult
 
 }

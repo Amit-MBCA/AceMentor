@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ninethStudents">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
@@ -28,7 +31,7 @@
         android:paddingTop="10dp"
         android:paddingRight="25dp"
         android:paddingBottom="10dp"
-        android:text="IBDP subject insights"
+        android:text="IB DP subject insights"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="26sp" />
@@ -45,12 +48,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:background="@drawable/tvsubjectsbg"
-            android:padding="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Sciences"
             android:textAlignment="center"
             android:textColor="#000000"
@@ -62,12 +66,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:background="@drawable/tvsubjectsbg"
-            android:padding="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Mathematics"
             android:textAlignment="center"
             android:textColor="#000000"
@@ -81,10 +86,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:padding="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:text="Studies in language and literature"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -99,7 +105,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:padding="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:text="Individuals and societies"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -114,7 +121,8 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:padding="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:text="Language Acquisition"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -129,36 +137,38 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/tvsubjectsbg"
-        android:padding="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:text="The arts"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="16sp" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvCore"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_margin="15dp"-->
-<!--        android:background="@drawable/tvsubjectsbg"-->
-<!--        android:paddingLeft="25dp"-->
-<!--        android:paddingTop="15dp"-->
-<!--        android:paddingRight="25dp"-->
-<!--        android:paddingBottom="15dp"-->
-<!--        android:text="Core Components"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="#000000"-->
-<!--        android:textSize="18sp" />-->
+    <TextView
+        android:id="@+id/tvCore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/tvsubjectsbg"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="Core Components"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/imageView"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|start"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:scaleType="center"
         app:backgroundTint="@color/white"
@@ -167,3 +177,4 @@
         app:tint="@color/primaryColor"
         tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>
+</ScrollView>

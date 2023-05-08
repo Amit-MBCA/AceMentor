@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         tools:context=".eleventhStudents">
 
         <TextView
@@ -32,7 +34,7 @@
             android:paddingTop="10dp"
             android:paddingRight="25dp"
             android:paddingBottom="10dp"
-            android:text="IBMYP subject insights"
+            android:text="IB DP subject insights"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="26sp" />
@@ -40,7 +42,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <TextView
@@ -48,83 +49,99 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/tvsubjectsbg"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:padding="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="Science"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvMath"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_weight="1"
                 android:background="@drawable/tvsubjectsbg"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:padding="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:text="Mathematics"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
         <TextView
             android:id="@+id/tvLang"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/tvsubjectsbg"
-            android:padding="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Studies in language and literature"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvIndividuals"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
             android:background="@drawable/tvsubjectsbg"
-            android:padding="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Individuals and societies"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvAcqusition"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/tvsubjectsbg"
-            android:padding="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:text="Language Acquisition"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -132,57 +149,62 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/tvsubjectsbg"
-                android:padding="10dp"
-                android:text="Arts"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:text="The Arts"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvPhe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:background="@drawable/tvsubjectsbg"
-                android:padding="10dp"
-                android:text="PHE"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvPhe"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/tvsubjectsbg"-->
+<!--                android:paddingTop="15dp"-->
+<!--                android:paddingBottom="15dp"-->
+<!--                android:text="PHE"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="16sp" />-->
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:paddingTop="15dp"-->
+<!--            android:paddingBottom="15dp">-->
 
-            <TextView
-                android:id="@+id/tvDesign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/tvsubjectsbg"
-                android:padding="10dp"
-                android:text="Design"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/tvDesign"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:background="@drawable/tvsubjectsbg"-->
+<!--                android:paddingTop="15dp"-->
+<!--                android:paddingBottom="15dp"-->
+<!--                android:text="Design"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textSize="16sp" />-->
 
             <!--        <TextView-->
             <!--            android:id="@+id/tvProjects"-->
@@ -204,7 +226,7 @@
             <!--            android:textColor="#000000"-->
             <!--            android:textSize="18sp" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/imageView"

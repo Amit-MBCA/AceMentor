@@ -1,11 +1,9 @@
 package com.example.ib;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -16,20 +14,18 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
     private int day,currentMonth=0;
-    private int month , requestCode = 1;
+    private int month ;
     private int year;
     private Button getForm;
     private int selectedhours=0;
@@ -197,18 +193,12 @@ public class scheduleMeet extends AppCompatActivity {
                                         "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + userName);
 
                                 if (intent.resolveActivity(getPackageManager()) != null) {
-                                    startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), requestCode);
+                                    startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), 1);
                                 }
                                 else{
                                     Toast.makeText(scheduleMeet.this,"no apps present in your phone",Toast.LENGTH_SHORT).show();
                                 }
 
-//                                List<ResolveInfo> resolveInfos = getPackageManager().queryIntentActivities(intent, 0);
-//                                if (resolveInfos.size() > 0) {
-//                                    startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), requestCode);
-//                                } else {
-//                                    Toast.makeText(scheduleMeet.this, "No App is Installed", Toast.LENGTH_LONG).show();
-//                                }
                             }
                             else{
                                 Toast.makeText(scheduleMeet.this, "Select upcoming day", Toast.LENGTH_LONG).show();
@@ -274,7 +264,11 @@ public class scheduleMeet extends AppCompatActivity {
 //        }
 //    }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(scheduleMeet.this,scheduleMeet.class));
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -285,6 +279,11 @@ public class scheduleMeet extends AppCompatActivity {
                 it.putExtra("selectedDate",selectedDay);
                 it.putExtra("UserMail",userMail);
                 startActivity(it);
+        }
+        else{
+            Intent it=new Intent(scheduleMeet.this,scheduleMeet.class);
+            Toast.makeText(this,"Retry to send the mail",Toast.LENGTH_SHORT).show();
+            startActivity(it);
         }
     } //onActivityResult
 

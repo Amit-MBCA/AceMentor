@@ -114,7 +114,8 @@ public class SlotActivity extends AppCompatActivity {
         Query bookQuery= FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child("Mentors").child(subject).orderByChild("std").startAt(tempStandard + 1);
+                .child("Mentors").child(subject).orderByChild("std").startAt(tempStandard);
+//                .child("Mentors").child(subject).orderByChild("std").startAt(tempStandard + 1);
 
         bookQuery.addValueEventListener(new ValueEventListener() {
             @Override

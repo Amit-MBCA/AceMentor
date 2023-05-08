@@ -12,27 +12,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import Api.JavaMailAPI;
 
 public class mConfirmed extends AppCompatActivity {
-    private String date,userMail;
     private int day,month,year;
-    private TextView showDate;
-    private ImageView backbtn;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mconfirmed);
         getSupportActionBar().hide();
-        backbtn=findViewById(R.id.imageView);
-        showDate=findViewById(R.id.showDate);
-        Intent it=getIntent();
-        date=it.getStringExtra("selectedDate");
-        userMail = it.getStringExtra("UserMail");
+        ImageView backbtn = findViewById(R.id.imageView);
+        TextView showDate = findViewById(R.id.showDate);
 
-//        int trynum=it.getIntExtra("trynum",10);
+
+        //Getting data from the scheduleMeet Activity
+        Intent it=getIntent();
+        String date = it.getStringExtra("selectedDate");
+        String userMail = it.getStringExtra("UserMail");
         showDate.setText(date);
 
       //  sendMail(userMail);         /// <<<< To send confirmation mail to user >>>>///
-
 
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +48,7 @@ public class mConfirmed extends AppCompatActivity {
         startActivity(new Intent(mConfirmed.this,HomePage.class));
     }
 
-
+    /// to call the java mail api sending mail method
     private void sendMail(String userMail) {
         String subject = "Confirmation Mail";
         String message = "Your Request for mentor support is sent to your selected mentor.";

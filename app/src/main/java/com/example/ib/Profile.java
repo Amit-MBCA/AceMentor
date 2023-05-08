@@ -180,7 +180,7 @@ public class Profile extends AppCompatActivity {
 
 
                 //to handle the selection of another subject as mentor
-                if (!tempSubject.equals(mentorSubject)) {
+                if (!tempSubject.equals(mentSubj)) {
                     DeleteFromFirebase(tempSubject);
                     Log.d(TAG, "delete method called from the spineer chanage ");
                 }

@@ -1,7 +1,6 @@
 package com.example.ib;
 
 import static android.content.ContentValues.TAG;
-import static com.example.ib.Signup.hideSoftKeyboard;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -145,7 +144,7 @@ public class Profile extends AppCompatActivity {
                 tempSubject = mentorSubject;
 
                 mentSubj = subjSpinner.getSelectedItem().toString();
-                hideSoftKeyboard(Profile.this, view);
+//                hideSoftKeyboard(Profile.this, view);
 
                 shrd2 = getSharedPreferences(Signup.PREFS_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = shrd2.edit();

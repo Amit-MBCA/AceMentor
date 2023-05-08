@@ -3,8 +3,6 @@ package com.example.ib;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -27,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,21 +35,21 @@ import java.util.Locale;
 import Api.JavaMailAPI;
 
 public class scheduleMeet extends AppCompatActivity {
-    private static final String TAG = "ScheduleActivity";
     private TextView pickDay, pickTime, getQuery;
     private int day,currentMonth=0;
     private int month ;
     private int year;
+    private Button getForm;
     private int selectedhours=0;
+    private ImageView backbtn;
     private String am_pm="am",query;
-
-    int RESULT_COLOR_RED = 1;
     private String currentDay,selectedTime,selectedDay="2040/04/30", userMail, userName;
-    
+    private int upcompingday=1;
+
+    public static String PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_meet);
         getSupportActionBar().hide();
@@ -58,7 +57,7 @@ public class scheduleMeet extends AppCompatActivity {
         SharedPreferences shrd1=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
         userMail = shrd1.getString("uEmail", "User Mail");
         userName = shrd1.getString("uName","User Name");
-        
+
         //Getting Intent data from the MentorsAdapter
         Bundle extras = getIntent().getExtras();
         String MentorEmail = extras.getString("email");
@@ -158,8 +157,8 @@ public class scheduleMeet extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-        
-        
+
+
         // TO HANDLE THE ON CLICK OF TIME PICKER
         pickTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,8 +200,8 @@ public class scheduleMeet extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
-        
-        
+
+
         // TO HANDLE THE ON CLICK SUBMIT BUTTON
         getForm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,7 +230,7 @@ public class scheduleMeet extends AppCompatActivity {
                                 intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + MentorSubject + ". I will be very grateful if you provide your valuable time. \n\n"
                                         + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
                                         "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + userName);
-                                setResult(RESULT_COLOR_RED);
+
 
                                 if (intent.resolveActivity(getPackageManager()) != null) {
                                     emailLauncher.launch(Intent.createChooser(intent, "Choose an Email client :"));
@@ -239,6 +238,7 @@ public class scheduleMeet extends AppCompatActivity {
                                 else{
                                     Toast.makeText(scheduleMeet.this,"no apps present in your phone",Toast.LENGTH_SHORT).show();
                                 }
+
                             }
                             else{
                                 Toast.makeText(scheduleMeet.this, "Select upcoming day", Toast.LENGTH_LONG).show();
@@ -261,7 +261,7 @@ public class scheduleMeet extends AppCompatActivity {
 
         });
 
-        
+
         /// TO HANDLE THE BACK BUTTON PRESS IN SCHEDULE_ACTIVITY
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,4 +272,40 @@ public class scheduleMeet extends AppCompatActivity {
             }
         });
     }
+
+//    @Override
+//    public void startActivityForResult(@NonNull Intent intent, int requestCode) {
+//        super.startActivityForResult(intent, requestCode);
+//        if(requestCode== 800){
+//            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+//            it.putExtra("selectedDate",selectedDay);
+//            it.putExtra("UserMail",userMail);
+//            startActivity(it);
+//            finish();
+//        }
+//    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(scheduleMeet.this,scheduleMeet.class));
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1) {
+
+                Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+                it.putExtra("selectedDate",selectedDay);
+                it.putExtra("UserMail",userMail);
+                startActivity(it);
+        }
+        else{
+            Intent it=new Intent(scheduleMeet.this,scheduleMeet.class);
+            Toast.makeText(this,"Retry to send the mail",Toast.LENGTH_SHORT).show();
+            startActivity(it);
+        }
+    } //onActivityResult
+
 }

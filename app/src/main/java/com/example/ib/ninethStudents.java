@@ -22,14 +22,16 @@ public class ninethStudents extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nineth_students);
         getSupportActionBar().hide();
+//        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         tvScience=findViewById(R.id.tvScience);
         tvMath=findViewById(R.id.tvMath);
         tvLangandLat=findViewById(R.id.tvLangandLit);
         tvIndividuals=findViewById(R.id.tvIndividuals);
         tvAcquisition=findViewById(R.id.tvAcqusition);
         tvArts=findViewById(R.id.tvArts);
-        backbtn=findViewById(R.id.imageView);
-//        tvCore=findViewById(R.id.tvCore);
+        backbtn=findViewById(R.id.fab);
+        tvCore=findViewById(R.id.tvCore);
         shrd=getSharedPreferences(Signup.PREFS_NAME,MODE_PRIVATE);
         std=shrd.getString("selectedStd","8th");
         tvScience.setOnClickListener(new View.OnClickListener() {
@@ -113,18 +115,13 @@ public class ninethStudents extends AppCompatActivity {
                 finish();
             }
         });
-//        tvCore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent it=new Intent(ninethStudents.this,SlotActivity.class);
-////                subj="Core Components";
-////                it.putExtra("Subject",subj);
-////                it.putExtra("std",std);
-////                startActivity(it);
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/the-arts/"));
-//                startActivity(browserIntent);
-//            }
-//        });
+        tvCore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://img.nordangliaeducation.com/resources/asia/_filecache/3a6/e9c/98079-iboptions_core_ncm.pdf"));
+                startActivity(browserIntent);
+            }
+        });
 
 
     }

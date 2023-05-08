@@ -3,12 +3,9 @@ package com.example.ib;
 import static com.example.ib.Signup.hideSoftKeyboard;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -132,7 +129,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isNetworkConnected()) {
-                    Intent intent = new Intent(HomePage.this, eleventhStudents.class);
+                    Intent intent = new Intent(HomePage.this, ninethStudents.class);
                     startActivity(intent);
                 }
                 else{
@@ -144,7 +141,7 @@ public class HomePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isNetworkConnected()) {
-                    Intent intent = new Intent(HomePage.this,eleventhStudents.class);
+                    Intent intent = new Intent(HomePage.this,ninethStudents.class);
                     startActivity(intent);
                 }
                 else{

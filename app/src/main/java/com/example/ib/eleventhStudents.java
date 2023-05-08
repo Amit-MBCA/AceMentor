@@ -23,8 +23,8 @@ public class eleventhStudents extends AppCompatActivity implements View.OnClickL
         TextView Individuals_and_societies = findViewById(R.id.tvIndividuals);
         TextView Language_Acquisition = findViewById(R.id.tvAcqusition);
         TextView Arts = findViewById(R.id.tvArts);
-        TextView PHE = findViewById(R.id.tvPhe);
-        TextView Design = findViewById(R.id.tvDesign);
+//        TextView PHE = findViewById(R.id.tvPhe);
+//        TextView Design = findViewById(R.id.tvDesign);
 //        TextView Project = findViewById(R.id.tvProjects);
 
         Science.setOnClickListener(this);
@@ -33,8 +33,8 @@ public class eleventhStudents extends AppCompatActivity implements View.OnClickL
         Individuals_and_societies.setOnClickListener(this);
         Language_Acquisition.setOnClickListener(this);
         Arts.setOnClickListener(this);
-        PHE.setOnClickListener(this);
-        Design.setOnClickListener(this);
+//        PHE.setOnClickListener(this);
+//        Design.setOnClickListener(this);
 //        Project.setOnClickListener(this);
 
         backbtn.setOnClickListener(new View.OnClickListener() {
@@ -55,46 +55,46 @@ public class eleventhStudents extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
             switch (v.getId()){
                 case R.id.tvScience:
-                    Intent gtsc=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/science/"));
+                    Intent gtsc=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/sciences/"));
                     startActivity(gtsc);
                       break;
                 case R.id.tvMath:
-                    Intent gtsm=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/mathematics/"));
+                    Intent gtsm=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/mathematics/"));
                     startActivity(gtsm);
                     break;
                 case R.id.tvLang:
 //                    intent=new Intent(this,SlotActivity.class);
 //                    intent.putExtra("Subject", "Language and Literature");
 //                    startActivity(intent);
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/language-and-literature/"));
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/language-and-literature/"));
                     startActivity(browserIntent);
                     break;
                 case R.id.tvIndividuals:
 //                    intent=new Intent(this,SlotActivity.class);
 //                    intent.putExtra("Subject", "Individuals and Societies");
 //                    startActivity(intent);
-                    Intent indi=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/individuals-and-societies/"));
+                    Intent indi=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/language-acquisition/"));
                     startActivity(indi);
                     break;
                 case R.id.tvAcqusition:
-                    Intent bt = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/language-acquisition/"));
+                    Intent bt = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/language-acquisition/"));
                     startActivity(bt);
                     break;
                 case R.id.tvArts:
 //                    intent=new Intent(this,SlotActivity.class);
 //                    intent.putExtra("Subject", "The Arts");
 //                    startActivity(intent);
-                    Intent tvarts = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/arts/"));
+                    Intent tvarts = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/diploma-programme/curriculum/the-arts/"));
                     startActivity(tvarts);
                     break;
-                case R.id.tvPhe:
-                    Intent gtphe = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/physical-and-health-education/"));
-                    startActivity(gtphe);
-                    break;
-                case R.id.tvDesign:
-                    Intent gtdesign = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/design/"));
-                    startActivity(gtdesign);
-                    break;
+//                case R.id.tvPhe:
+//                    Intent gtphe = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/physical-and-health-education/"));
+//                    startActivity(gtphe);
+//                    break;
+//                case R.id.tvDesign:
+//                    Intent gtdesign = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ibo.org/programmes/middle-years-programme/curriculum/design/"));
+//                    startActivity(gtdesign);
+//                    break;
 
             }
     }

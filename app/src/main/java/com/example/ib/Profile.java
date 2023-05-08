@@ -293,9 +293,9 @@ public class Profile extends AppCompatActivity {
 
     private void uploadToFirebase() {
         //Dialog to show percentage
-        ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setTitle("File Uploader");
-        dialog.show();
+//        ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+//        dialog.setTitle("File Uploader");
+//        dialog.show();
 
         //temp standard of student (int type)
         switch(std){
@@ -326,7 +326,7 @@ public class Profile extends AppCompatActivity {
                         uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                dialog.dismiss();
+ //                               dialog.dismiss();
                                 ///Reference of Mentor class
                                 Mentors mentors = new Mentors(user, mail, tempStandard, uri.toString(), mentSubj);
 
@@ -339,16 +339,28 @@ public class Profile extends AppCompatActivity {
                                         Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();
                                         Log.d(TAG, "Node added successfully");
                                     }
+
+
                                 });
                                 // < end > Realtime Database push code
                             }
                         });
                     }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                })
+//                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//                        float percent = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+//                        dialog.setMessage("Uploaded : " + (int) percent + "%");
+//                    }
+//                })
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        float percent = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                        dialog.setMessage("Uploaded : " + (int) percent + "%");
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle unsuccessful upload here
+                        // Show a toast message
+                        Toast.makeText(Profile.this, "File upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        dialog.dismiss();
                     }
                 });
 

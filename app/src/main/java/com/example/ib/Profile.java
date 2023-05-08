@@ -68,6 +68,8 @@ public class Profile extends AppCompatActivity {
     private ImageView backbtn;
     private String tempSubject;  // to handle the spinner subject change
 
+    private static final String TAG = "MyActivity";
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +184,7 @@ public class Profile extends AppCompatActivity {
                 //to handle the selection of another subject as mentor
                 if (!tempSubject.equals(mentSubj)) {
                     DeleteFromFirebase(tempSubject);
-                    Log.d(TAG, "delete method called from the spineer chanage ");
+                    Log.d(TAG, "delete method called from the spinner change ");
                 }
 
                 //to handle the mentor switch
@@ -198,6 +200,8 @@ public class Profile extends AppCompatActivity {
                     editor.putString("mentorSubject", null);
                     editor.apply();
                     Log.d(TAG, "delete method called due to checker change");
+
+                    //Delete the mentor from database
                     DeleteFromFirebase(mentSubj);
                 }
 
@@ -208,6 +212,8 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
+
+
         if (std.equals("8th")) {
             isMentor.setVisibility(View.INVISIBLE);
         } else {
@@ -334,9 +340,7 @@ public class Profile extends AppCompatActivity {
                                         Log.d(TAG, "Node added successfully");
                                     }
                                 });
-
                                 // < end > Realtime Database push code
-
                             }
                         });
                     }

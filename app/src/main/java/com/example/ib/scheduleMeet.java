@@ -1,11 +1,15 @@
 package com.example.ib;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,13 +18,21 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import Api.JavaMailAPI;
 
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
@@ -36,8 +48,6 @@ public class scheduleMeet extends AppCompatActivity {
 
     public static String PREFS_NAME = "MyPrefsFile";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +58,7 @@ public class scheduleMeet extends AppCompatActivity {
         userMail = shrd1.getString("uEmail", "User Mail");
         userName = shrd1.getString("uName","User Name");
 
-
-
-
-        //get intent data from the MentorsAdapter
+        //Getting Intent data from the MentorsAdapter
         Bundle extras = getIntent().getExtras();
         String MentorEmail = extras.getString("email");
         String MentorName = extras.getString("MentorName");
@@ -63,14 +70,37 @@ public class scheduleMeet extends AppCompatActivity {
         pickDay = findViewById(R.id.pickday);
         pickTime = findViewById(R.id.picktime);
         getQuery = findViewById(R.id.getQuery);
-        getForm = findViewById(R.id.getFormBtn);
-//        iday= Integer.parseInt(pickDay.getText().toString());
-//        itime=Integer.parseInt(pickTime.getText().toString());
-//        day=Integer.toString(iday);
-//        time=Integer.toString(itime);
+        Button getForm = findViewById(R.id.getFormBtn);
+
         currentDay= new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
-        backbtn=findViewById(R.id.imageView);
-        // on below line we are adding click listener for our pick date button
+        ImageView backbtn = findViewById(R.id.imageView);
+
+
+
+        // Create an Activity Result Launcher for the email intent
+        ActivityResultLauncher<Intent> emailLauncher =registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    Toast.makeText(scheduleMeet.this, "resultCode : " + result.getResultCode(), Toast.LENGTH_SHORT).show();
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // Email sent successfully
+                        Intent it = new Intent(scheduleMeet.this, mConfirmed.class);
+                        it.putExtra("selectedDate", selectedDay);
+                        it.putExtra("UserMail", userMail);
+                        startActivity(it);
+                    } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                        // Activity was cancelled by the user
+                        Toast.makeText(scheduleMeet.this, "result cancled", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        // Email sending cancelled or failed
+                        // Handle cancellation or failure as required
+                        Toast.makeText(scheduleMeet.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        // Launch the email intent using the Activity Result Launcher
+
+
+        // TO HANDLE THE ON CLICK OF THE DATE PICKER
         pickDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +154,9 @@ public class scheduleMeet extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+
+        // TO HANDLE THE ON CLICK OF TIME PICKER
         pickTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,21 +197,24 @@ public class scheduleMeet extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
+
+        // TO HANDLE THE ON CLICK SUBMIT BUTTON
         getForm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 query=getQuery.getText().toString();
-                SimpleDateFormat dtobj = new SimpleDateFormat("yyyy/MM/dd");
+//                SimpleDateFormat dtobj = new SimpleDateFormat("dd/MM/yyyy");
 //
-                try {
-                    Date cd= dtobj.parse(currentDay);
-                    Date sd=dtobj.parse(selectedDay);
-                    upcompingday=sd.compareTo(cd);
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-//                int upcompingday=selectedDay.compareTo(currentDay);
+//                try {
+//                    Date cd= dtobj.parse(currentDay);
+//                    Date sd=dtobj.parse(selectedDay);
+//                    upcompingday=sd.compareTo(cd);
+//
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+                int upcompingday=selectedDay.compareTo(currentDay);
                 if (!(am_pm.equals("am"))&&!(currentMonth==0)) {
                     if(selectedhours>7&&selectedhours<18) {
                         if(!(query.isEmpty())) {
@@ -192,8 +228,11 @@ public class scheduleMeet extends AppCompatActivity {
                                         + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
                                         "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + userName);
 
+
                                 if (intent.resolveActivity(getPackageManager()) != null) {
+//                                    emailLauncher.launch(Intent.createChooser(intent, "Choose an Email client :"));
                                     startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), 1);
+
                                 }
                                 else{
                                     Toast.makeText(scheduleMeet.this,"no apps present in your phone",Toast.LENGTH_SHORT).show();
@@ -217,31 +256,12 @@ public class scheduleMeet extends AppCompatActivity {
                     Toast.makeText(scheduleMeet.this,"Please select date and time",Toast.LENGTH_SHORT).show();
                 }
 
-
-//                // Create the email activity result launcher
-//                ActivityResultLauncher<Intent> emailLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//                        result -> {
-//                            // Check if the email was sent successfully
-//                            if (result.getResultCode() == Activity.RESULT_OK) {
-//                                // Start the confirmation activity
-//                                Intent it = new Intent(scheduleMeet.this, mConfirmed.class);
-//                                startActivity(it);
-//                            } else {
-//                                // Handle the case where the email was not sent successfully
-//                            }
-//                        });
-//
-//                // Start the email intent
-//                emailLauncher.launch(Intent.createChooser(intent, "Send email..."));
-//                }
-//                else{
-//                    Toast.makeText(getApplicationContext(), "Please select time and day", Toast.LENGTH_SHORT).show();
-//                }
-
             }
 
-
         });
+
+
+        /// TO HANDLE THE BACK BUTTON PRESS IN SCHEDULE_ACTIVITY
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

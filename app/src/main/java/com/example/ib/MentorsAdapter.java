@@ -72,6 +72,10 @@ public class MentorsAdapter extends FirebaseRecyclerAdapter<Mentors,MentorsAdapt
         return new myViewHolder(view);
     }
 
+    @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
 
     /// my view holder class
     class myViewHolder extends RecyclerView.ViewHolder{

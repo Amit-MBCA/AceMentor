@@ -158,6 +158,8 @@ public class HomePage extends AppCompatActivity {
     }
 
 
+
+    ///DIALOG TO SELECT THE SUBJECT TO SEARCH FOR MENTOR
     public void openDialog(){
 
         //spinner code
@@ -221,4 +223,5 @@ public class HomePage extends AppCompatActivity {
         });
         alertDialog.show();
     }
+
 }

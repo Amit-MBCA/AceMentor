@@ -3,12 +3,14 @@ package com.example.ib;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,23 +83,20 @@ public class scheduleMeet extends AppCompatActivity {
         // Create an Activity Result Launcher for the email intent
         ActivityResultLauncher<Intent> emailLauncher =registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    Toast.makeText(scheduleMeet.this, "resultCode : " + result.getResultCode(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(scheduleMeet.this, "resultCode : " + result, Toast.LENGTH_SHORT).show();
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         // Email sent successfully
                         Intent it = new Intent(scheduleMeet.this, mConfirmed.class);
                         it.putExtra("selectedDate", selectedDay);
                         it.putExtra("UserMail", userMail);
                         startActivity(it);
-                    } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
-                        // Activity was cancelled by the user
-                        Toast.makeText(scheduleMeet.this, "result cancled", Toast.LENGTH_SHORT).show();
-
                     } else {
-                        // Email sending cancelled or failed
-                        // Handle cancellation or failure as required
-                        Toast.makeText(scheduleMeet.this, "Error", Toast.LENGTH_SHORT).show();
+                        // Activity was cancelled by the user
+                        String errorMessage = (result.getData() != null && result.getData().getStringExtra("error") != null) ? result.getData().getStringExtra("error") : "Unknown error";
+                        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
                     }
                 });
+
         // Launch the email intent using the Activity Result Launcher
 
 
@@ -204,6 +204,7 @@ public class scheduleMeet extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 query=getQuery.getText().toString();
+
 //                SimpleDateFormat dtobj = new SimpleDateFormat("dd/MM/yyyy");
 //
 //                try {
@@ -214,6 +215,7 @@ public class scheduleMeet extends AppCompatActivity {
 //                } catch (ParseException e) {
 //                    e.printStackTrace();
 //                }
+
                 int upcompingday=selectedDay.compareTo(currentDay);
                 if (!(am_pm.equals("am"))&&!(currentMonth==0)) {
                     if(selectedhours>7&&selectedhours<18) {
@@ -272,33 +274,23 @@ public class scheduleMeet extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    public void startActivityForResult(@NonNull Intent intent, int requestCode) {
-//        super.startActivityForResult(intent, requestCode);
-//        if(requestCode== 800){
-//            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
-//            it.putExtra("selectedDate",selectedDay);
-//            it.putExtra("UserMail",userMail);
-//            startActivity(it);
-//            finish();
-//        }
-//    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(scheduleMeet.this,scheduleMeet.class));
+        startActivity(new Intent(scheduleMeet.this,HomePage.class));
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1) {
 
-                Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
-                it.putExtra("selectedDate",selectedDay);
-                it.putExtra("UserMail",userMail);
-                startActivity(it);
+            Intent it=new Intent(scheduleMeet.this,mConfirmed.class);
+            it.putExtra("selectedDate",selectedDay);
+            it.putExtra("UserMail",userMail);
+            startActivity(it);
         }
         else{
             Intent it=new Intent(scheduleMeet.this,scheduleMeet.class);
@@ -308,3 +300,4 @@ public class scheduleMeet extends AppCompatActivity {
     } //onActivityResult
 
 }
+

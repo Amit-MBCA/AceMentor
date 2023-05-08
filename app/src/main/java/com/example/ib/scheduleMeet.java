@@ -100,9 +100,6 @@ public class scheduleMeet extends AppCompatActivity {
         // Launch the email intent using the Activity Result Launcher
 
 
-
-
-
         // TO HANDLE THE ON CLICK OF THE DATE PICKER
         pickDay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,7 +230,9 @@ public class scheduleMeet extends AppCompatActivity {
 
 
                                 if (intent.resolveActivity(getPackageManager()) != null) {
-                                    emailLauncher.launch(Intent.createChooser(intent, "Choose an Email client :"));
+//                                    emailLauncher.launch(Intent.createChooser(intent, "Choose an Email client :"));
+                                    startActivityForResult(Intent.createChooser(intent, "Choose an Email client :"), 1);
+
                                 }
                                 else{
                                     Toast.makeText(scheduleMeet.this,"no apps present in your phone",Toast.LENGTH_SHORT).show();

@@ -4,9 +4,11 @@ import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,7 +95,7 @@ public class Profile extends AppCompatActivity {
         img = shrd1.getString("image_data", "image");
         mentor = shrd1.getBoolean("isMentor", false);
         id = shrd1.getString("ID", "123");
-        backbtn=(ImageView) findViewById(R.id.imageView);
+        backbtn = (ImageView) findViewById(R.id.imageView);
         mentorSubject = shrd1.getString("mentorSubject", "Science");
         if (std.equals("11th") || std.equals("12th")) {
             subjAdapter = ArrayAdapter.createFromResource(this, R.array.eSubjSpinner, R.layout.subj_spinner);
@@ -180,36 +182,44 @@ public class Profile extends AppCompatActivity {
                 shrd2 = getSharedPreferences(Signup.PREFS_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = shrd2.edit();
 
+                if (isNetworkConnected()) {                         //to check internet connection
 
-                //to handle the selection of another subject as mentor
-                if (!tempSubject.equals(mentSubj)) {
-                    DeleteFromFirebase(tempSubject);
-                    Log.d(TAG, "delete method called from the spinner change ");
-                }
+                    //to handle the selection of another subject as mentor
+                    if (!tempSubject.equals(mentSubj)) {
+                        DeleteFromFirebase(tempSubject);
+                        Log.d(TAG, "delete method called from the spinner change ");
+                    }
 
-                //to handle the mentor switch
-                if (isCheck) {
-                    editor.putBoolean("isMentor", true);
+                    //to handle the mentor switch
+                    if (isCheck) {
+                        editor.putBoolean("isMentor", true);
+                        editor.putString("mentorSubject", mentSubj);
+
+
+                        //Delete the mentor from database
+                        DeleteFromFirebase(mentSubj);
+
+                        //DataUpload method call
+                        uploadToFirebase();
+
+                    } else {
+                        editor.putBoolean("isMentor", false);
+                        editor.putString("mentorSubject", null);
+                        editor.apply();
+                        Log.d(TAG, "delete method called due to checker change");
+
+                        //Delete the mentor from database
+                        DeleteFromFirebase(mentSubj);
+                    }
+
                     editor.putString("mentorSubject", mentSubj);
-
-                    //DataUpload method call
-                    uploadToFirebase();
-
-                } else {
-                    editor.putBoolean("isMentor", false);
-                    editor.putString("mentorSubject", null);
                     editor.apply();
-                    Log.d(TAG, "delete method called due to checker change");
-
-                    //Delete the mentor from database
-                    DeleteFromFirebase(mentSubj);
+                    Intent intent = new Intent(Profile.this, HomePage.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(Profile.this, "Check your internet connection", Toast.LENGTH_SHORT).show();
                 }
-
-                editor.putString("mentorSubject", mentSubj);
-                editor.apply();
-                Intent intent = new Intent(Profile.this, HomePage.class);
-                startActivity(intent);
-                finish();
             }
         });
 
@@ -229,7 +239,7 @@ public class Profile extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it=new Intent(Profile.this,HomePage.class);
+                Intent it = new Intent(Profile.this, HomePage.class);
                 startActivity(it);
                 finish();
             }
@@ -293,31 +303,31 @@ public class Profile extends AppCompatActivity {
 
     private void uploadToFirebase() {
         //Dialog to show percentage
-        ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setTitle("File Uploader");
-        dialog.show();
+//        ProgressDialog dialog = new ProgressDialog(getApplicationContext());
+//        dialog.setTitle("File Uploader");
+//        dialog.show();
 
         //temp standard of student (int type)
-        switch(std){
+        switch (std) {
             case "8th":
-                tempStandard=8;
+                tempStandard = 8;
                 break;
             case "9th":
-                tempStandard=9;
+                tempStandard = 9;
                 break;
             case "10th":
-                tempStandard=10;
+                tempStandard = 10;
                 break;
             case "11th":
-                tempStandard=11;
+                tempStandard = 11;
                 break;
             default:
-                tempStandard=12;
+                tempStandard = 12;
         }
 
         //Firebase storage reference
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference uploader = storage.getReference("Image" + new Random().nextInt(50));
+        StorageReference uploader = storage.getReference("Image" + new Random().nextInt(1000));
 
         uploader.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -326,7 +336,7 @@ public class Profile extends AppCompatActivity {
                         uploader.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                dialog.dismiss();
+                                //                               dialog.dismiss();
                                 ///Reference of Mentor class
                                 Mentors mentors = new Mentors(user, mail, tempStandard, uri.toString(), mentSubj);
 
@@ -339,18 +349,40 @@ public class Profile extends AppCompatActivity {
                                         Toast.makeText(Profile.this, "You are now Mentor", Toast.LENGTH_LONG).show();
                                         Log.d(TAG, "Node added successfully");
                                     }
+
+
                                 });
                                 // < end > Realtime Database push code
                             }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Profile.this, "Data upload failed : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
                         });
                     }
-                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                })
+//                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//                        float percent = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+//                        dialog.setMessage("Uploaded : " + (int) percent + "%");
+//                    }
+//                })
+                .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                        float percent = (100 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
-                        dialog.setMessage("Uploaded : " + (int) percent + "%");
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle unsuccessful upload here
+                        // Show a toast message
+                        Toast.makeText(Profile.this, "File upload failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

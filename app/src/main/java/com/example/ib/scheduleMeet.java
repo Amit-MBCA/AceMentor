@@ -3,15 +3,10 @@ package com.example.ib;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,22 +15,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-
-import Api.JavaMailAPI;
 
 public class scheduleMeet extends AppCompatActivity {
     private TextView pickDay, pickTime, getQuery;
@@ -226,7 +213,7 @@ public class scheduleMeet extends AppCompatActivity {
                                 intent.putExtra(Intent.EXTRA_EMAIL, addresses);
                                 intent.putExtra(Intent.EXTRA_CC, cc);
                                 intent.putExtra(Intent.EXTRA_SUBJECT, "Mentor Guidance");
-                                intent.putExtra(Intent.EXTRA_TEXT, "I need guidance in " + MentorSubject + ". I will be very grateful if you provide your valuable time. \n\n"
+                                intent.putExtra(Intent.EXTRA_TEXT, "I need your guidance in " + MentorSubject + ". I will be really grateful if the time below works for you and your preferred medium of connecting (online call or physical meeting). \n\n"
                                         + getQuery.getText().toString() + "\n\n\n Meeting Schedule \n\nDate - " + pickDay.getText().toString() +
                                         "\n\nTime - " + pickTime.getText().toString() + "\n\nRegards,\n" + userName);
 

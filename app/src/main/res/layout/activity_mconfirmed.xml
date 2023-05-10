@@ -29,7 +29,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
-        android:text="Congratulations, your first meeting with your mentor is confirmed. You will also receive a confirmation email with the date and time. Otherwise you need to book a slot again. \n Thank You !"
+        android:text="Congratulations, your first meeting with your mentor is confirmed. You will also receive a confirmation email with the date and time. Otherwise kindly book slot again. \n Thank You !"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="16sp" />

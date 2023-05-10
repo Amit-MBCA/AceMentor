@@ -1,9 +1,6 @@
 package com.example.ib;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,7 +33,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -98,7 +94,7 @@ public class Profile extends AppCompatActivity {
         backbtn = (ImageView) findViewById(R.id.imageView);
         mentorSubject = shrd1.getString("mentorSubject", "Science");
         if (std.equals("11th") || std.equals("12th")) {
-            subjAdapter = ArrayAdapter.createFromResource(this, R.array.eSubjSpinner, R.layout.subj_spinner);
+            subjAdapter = ArrayAdapter.createFromResource(this, R.array.nSubjSpinner, R.layout.subj_spinner);
         } else {
             subjAdapter = ArrayAdapter.createFromResource(this, R.array.nSubjSpinner, R.layout.subj_spinner);
         }

@@ -82,22 +82,30 @@ public class HomePage extends AppCompatActivity {
         gtmlbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNetworkConnected()) {
-                    openDialog();
+                if(!(std.equals("12th"))) {
+                    if (isNetworkConnected()) {
+                        openDialog();
+                    } else {
+                        Toast.makeText(HomePage.this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
-                    Toast.makeText(HomePage.this,"Check your internet connection",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "No mentors available for your grade", Toast.LENGTH_SHORT).show();
                 }
             }
         });
         gtmli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isNetworkConnected()) {
-                    openDialog();
+                if(!(std.equals("12th"))) {
+                    if (isNetworkConnected()) {
+                        openDialog();
+                    } else {
+                        Toast.makeText(HomePage.this, "Check your internet connection", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
-                    Toast.makeText(HomePage.this,"Check your internet connection",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "No mentors available for your grade", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -164,7 +172,7 @@ public class HomePage extends AppCompatActivity {
 
         //spinner code
         if (std.equals("11th") || std.equals("12th")) {
-            subjAdapter = ArrayAdapter.createFromResource(this, R.array.eSubjSpinner,R.layout.subj_spinner);
+            subjAdapter = ArrayAdapter.createFromResource(this, R.array.nSubjSpinner,R.layout.subj_spinner);
         } else {
             subjAdapter = ArrayAdapter.createFromResource(this, R.array.nSubjSpinner, R.layout.subj_spinner);
         }

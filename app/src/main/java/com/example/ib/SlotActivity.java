@@ -142,6 +142,8 @@ public class SlotActivity extends AppCompatActivity {
 
         adapter = new MentorsAdapter(options);
         recview.setAdapter(adapter);
+
+
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

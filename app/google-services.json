@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "507412492314",
-    "project_id": "acementor-cb23b",
-    "storage_bucket": "acementor-cb23b.appspot.com"
+    "project_number": "152149451717",
+    "firebase_url": "https://ace-mentor-default-rtdb.firebaseio.com",
+    "project_id": "ace-mentor",
+    "storage_bucket": "ace-mentor.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:507412492314:android:5d5ba69273bce9552d61a3",
+        "mobilesdk_app_id": "1:152149451717:android:3ef16ec2a9f5affeff61ac",
         "android_client_info": {
           "package_name": "com.example.ib"
         }
       },
       "oauth_client": [
         {
-          "client_id": "507412492314-bnq105qm42pltmmqgotbabit1f85hdgh.apps.googleusercontent.com",
+          "client_id": "152149451717-n7h7gulgt4kma8u37k9jvnnjrn9q61do.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBhmI8DhmXtVhXJzgFR8Ii-1LyvXgX6Yww"
+          "current_key": "AIzaSyD7qF-XnTNbjgp-Vn-gfurW1HhafOJM-VQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "507412492314-bnq105qm42pltmmqgotbabit1f85hdgh.apps.googleusercontent.com",
+              "client_id": "152149451717-n7h7gulgt4kma8u37k9jvnnjrn9q61do.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

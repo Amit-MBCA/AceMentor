@@ -51,7 +51,7 @@ public class scheduleMeet extends AppCompatActivity {
         //Getting Intent data from the MentorsAdapter
         Bundle extras = getIntent().getExtras();
         String MentorEmail = extras.getString("email");
-        String MentorName = extras.getString("MentorName");
+        String MentorName = extras.getString("mentorName");
         String MentorSubject = extras.getString("mentorSubject");
 
         String[] addresses = {MentorEmail};

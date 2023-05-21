@@ -132,7 +132,7 @@ public class Profile extends AppCompatActivity {
         tvstd.setText(std);
 
         if (std.equals("11th") || std.equals("12th")) {
-            subjAdapter = ArrayAdapter.createFromResource(this, R.array.eSubjSpinner, R.layout.subj_spinner);
+            subjAdapter = ArrayAdapter.createFromResource(this, R.array.nSubjSpinner, R.layout.subj_spinner);
         } else {
             subjAdapter = ArrayAdapter.createFromResource(this, R.array.nSubjSpinner, R.layout.subj_spinner);
         }
